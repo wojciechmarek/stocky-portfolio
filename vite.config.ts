@@ -7,7 +7,20 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
-    })
+      includeAssets: ['favicon.ico', 'vite.svg'],
+      manifest: {
+        name: 'Stocky',
+        short_name: 'Stocky',
+        description: 'The personal investments portfolio manager',
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: 'stocky.png',
+            sizes: '256x256',
+            type: 'image/png',
+          },
+        ],
+      },
+    }),
   ],
 })
