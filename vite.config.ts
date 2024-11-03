@@ -12,7 +12,7 @@ export default defineConfig({
         name: 'Stocky',
         short_name: 'Stocky',
         description: 'The personal investments portfolio manager',
-        theme_color: '#ffffff',
+        theme_color: '#141a21',
         icons: [
           {
             src: 'stocky.png',

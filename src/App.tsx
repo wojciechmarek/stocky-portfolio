@@ -1,30 +1,23 @@
-import { useState } from 'react'
 import stockyLogo from './assets/stocky.png'
-import './App.css'
+import { Button } from "@material-tailwind/react";
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
+    <div className='flex flex-col'>
+
+        <div className='flex-grow'>
+          <h1 className="text-3xl font-bold underline">
+            Hello world!
+          </h1>
           <img src={stockyLogo} className="logo" alt="Vite logo" />
-        </a>
-      </div>
-      <h1>Stocky</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+        </div>
+
+        <div className='bg-[#1b252d] h-10'>
+          <p>asdasd</p>
+          <Button>asdasdasd</Button>
+        </div>
+    </div>
   )
 }
 
