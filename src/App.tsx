@@ -1,10 +1,4 @@
-import {
-  ChartCandlestick,
-  Ellipsis,
-  House,
-  TableProperties,
-  Wallet,
-} from "lucide-react";
+import { ChartCandlestick, House, TableProperties, Wallet } from "lucide-react";
 import stockyLogo from "./assets/stocky.png";
 import { Button } from "@material-tailwind/react";
 
@@ -16,7 +10,7 @@ function App() {
         <h1 className="text-3xl font-bold ml-3">Stocky</h1>
       </div>
 
-      <div className="bg-[#1b252d] h-20 flex items-center justify-evenly ">
+      <div className="bg-[#1b252d] h-20 flex items-center justify-evenly p-2">
         <Button className="bg-[#253642] rounded-full flex items-center normal-case">
           <div className="h-6 w-6 flex">
             <House />
@@ -36,11 +30,6 @@ function App() {
         <Button className="bg-transparent rounded-full">
           <div className="h-6 w-6">
             <Wallet />
-          </div>
-        </Button>
-        <Button className="bg-transparent rounded-full">
-          <div className="h-6 w-6">
-            <Ellipsis />
           </div>
         </Button>
       </div>
