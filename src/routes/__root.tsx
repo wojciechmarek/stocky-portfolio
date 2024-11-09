@@ -47,14 +47,6 @@ export const Route = createRootRoute({
             <p className="ml-3 hidden group-[&.active]:block">Wallet</p>
           </Button>
         </Link>
-        <Link to="/more" className="group [&.active]:font-bold">
-          <Button className="bg-transparent group-[&.active]:bg-[#253642] rounded-full flex items-center normal-case">
-            <div className="h-6 w-6 flex">
-              <MoreHorizontal />
-            </div>
-            <p className="ml-3 hidden group-[&.active]:block">More</p>
-          </Button>
-        </Link>
       </div>
     </div>
   ),
