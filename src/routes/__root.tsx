@@ -1,12 +1,6 @@
 import { Button } from "@material-tailwind/react";
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-import {
-  ChartCandlestick,
-  House,
-  MoreHorizontal,
-  Table,
-  Wallet,
-} from "lucide-react";
+import { ChartCandlestick, House, Table, Wallet } from "lucide-react";
 
 export const Route = createRootRoute({
   component: () => (
