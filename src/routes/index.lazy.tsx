@@ -23,7 +23,7 @@ function Index() {
 
   return (
     <>
-      <div className="flex flex-row mx-6 mt-6 items-center justify-between">
+      <div className="flex flex-row mx-3 mt-6 items-center justify-between">
         <h1 className="font-bold text-3xl">Overview</h1>
         <div className="flex flex-row gap-1 items-center">
           <Button className="bg-transparent p-3 ">
@@ -42,7 +42,7 @@ function Index() {
         </div>
       </div>
 
-      <Accordion open={open === 1} className="px-6">
+      <Accordion open={open === 1} className="px-3">
         <AccordionHeader
           onClick={() => handleOpen(1)}
           className="text-inherit hover:text-inherit border-0 p-0 mt-6"
@@ -79,7 +79,7 @@ function Index() {
 
       <Button
         color="red"
-        className="mx-6"
+        className="mx-3"
         onClick={() => {
           toast.error(Msg, {
             className: "rounded-none h-24 bg-[#4e8d7c]",

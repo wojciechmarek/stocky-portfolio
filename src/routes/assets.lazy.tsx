@@ -45,7 +45,7 @@ function About() {
   ];
   return (
     <>
-      <div className="flex flex-row mx-6 mt-6 items-center justify-between">
+      <div className="flex flex-row mx-3 mt-6 items-center justify-between">
         <h1 className="font-bold text-3xl">Assets</h1>
         <div className="flex flex-row gap-1 items-center">
           <Button className="bg-transparent p-3 ">
@@ -66,7 +66,7 @@ function About() {
 
       <Tabs>
         <TabsHeader
-          className="bg-[#1b1e1c] mt-6 mx-6"
+          className="bg-[#1b1e1c] mt-6 mx-3"
           indicatorProps={{
             className: "bg-[#1e201f]",
           }}
