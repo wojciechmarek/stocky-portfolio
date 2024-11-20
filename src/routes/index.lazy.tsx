@@ -19,6 +19,33 @@ export const Route = createLazyFileRoute("/" as never)({
 function Index() {
   const [open, setOpen] = useState(1);
 
+  const stats = [
+    {
+      name: "Total balance",
+      amount: "$23,234",
+      profit: "$23,234",
+      percentageProfit: 21,
+    },
+    {
+      name: "Opened assets",
+      amount: "$23,234",
+      profit: "$23,234",
+      percentageProfit: 21,
+    },
+    {
+      name: "Unrealized profit",
+      amount: "$23,234",
+      profit: "$23,234",
+      percentageProfit: 21,
+    },
+    {
+      name: "XIRR",
+      amount: "$23,234",
+      profit: "$23,234",
+      percentageProfit: 21,
+    },
+  ];
+
   const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
 
   return (
@@ -42,12 +69,32 @@ function Index() {
         </div>
       </div>
 
+      <div className="grid mt-6 grid-cols-2 gap-2 mx-3">
+        {stats.map((stat) => (
+          <div
+            key={stat.name}
+            className="flex flex-row bg-[#121413] h-24 rounded-xl py-2 px-3"
+          >
+            <div className="flex flex-col justify-between">
+              <h2 className="text-sm text-gray-600">{stat.name}</h2>
+              <div className="">
+                <h3 className="text-2xl font-bold text-[#ffffffde]">$23,234</h3>
+                <h3 className="inline text-sm text-gray-600">+$1,231</h3>{" "}
+                <span className="text-sm text-green-300 rounded-full bg-green-300 bg-opacity-30 py-0.5 px-2">
+                  +2,1%
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <Accordion open={open === 1} className="px-3">
         <AccordionHeader
           onClick={() => handleOpen(1)}
           className="text-inherit hover:text-inherit border-0 p-0 mt-6"
         >
-          Quick stats
+          Money
         </AccordionHeader>
         <AccordionBody>
           <div className="flex flex-row bg-[#121413] h-24 rounded-xl py-2 px-3">
