@@ -11,14 +11,14 @@ export default defineConfig({
     VitePWA({
       includeAssets: ["favicon.ico", "vite.svg"],
       manifest: {
-        name: "Stocky",
-        short_name: "Stocky",
+        name: "stocky-portfolio",
+        short_name: "stocky-portfolio",
         description: "The personal investments portfolio manager",
         theme_color: "#141a21",
         background_color: "141a21",
         icons: [
           {
-            src: "stocky.png",
+            src: "stocky-portfolio.png",
             sizes: "256x256",
             type: "image/png",
           },
