@@ -16,20 +16,14 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
-const WalletLazyImport = createFileRoute('/wallet')()
 const StatsLazyImport = createFileRoute('/stats')()
 const MoreLazyImport = createFileRoute('/more')()
+const LoginLazyImport = createFileRoute('/login')()
 const AssetsLazyImport = createFileRoute('/assets')()
 const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
-
-const WalletLazyRoute = WalletLazyImport.update({
-  id: '/wallet',
-  path: '/wallet',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/wallet.lazy').then((d) => d.Route))
 
 const StatsLazyRoute = StatsLazyImport.update({
   id: '/stats',
@@ -42,6 +36,12 @@ const MoreLazyRoute = MoreLazyImport.update({
   path: '/more',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/more.lazy').then((d) => d.Route))
+
+const LoginLazyRoute = LoginLazyImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
 
 const AssetsLazyRoute = AssetsLazyImport.update({
   id: '/assets',
@@ -86,6 +86,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AssetsLazyImport
       parentRoute: typeof rootRoute
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/more': {
       id: '/more'
       path: '/more'
@@ -100,13 +107,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StatsLazyImport
       parentRoute: typeof rootRoute
     }
-    '/wallet': {
-      id: '/wallet'
-      path: '/wallet'
-      fullPath: '/wallet'
-      preLoaderRoute: typeof WalletLazyImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -116,18 +116,18 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
   '/assets': typeof AssetsLazyRoute
+  '/login': typeof LoginLazyRoute
   '/more': typeof MoreLazyRoute
   '/stats': typeof StatsLazyRoute
-  '/wallet': typeof WalletLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
   '/assets': typeof AssetsLazyRoute
+  '/login': typeof LoginLazyRoute
   '/more': typeof MoreLazyRoute
   '/stats': typeof StatsLazyRoute
-  '/wallet': typeof WalletLazyRoute
 }
 
 export interface FileRoutesById {
@@ -135,17 +135,17 @@ export interface FileRoutesById {
   '/': typeof IndexLazyRoute
   '/about': typeof AboutLazyRoute
   '/assets': typeof AssetsLazyRoute
+  '/login': typeof LoginLazyRoute
   '/more': typeof MoreLazyRoute
   '/stats': typeof StatsLazyRoute
-  '/wallet': typeof WalletLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/assets' | '/more' | '/stats' | '/wallet'
+  fullPaths: '/' | '/about' | '/assets' | '/login' | '/more' | '/stats'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/assets' | '/more' | '/stats' | '/wallet'
-  id: '__root__' | '/' | '/about' | '/assets' | '/more' | '/stats' | '/wallet'
+  to: '/' | '/about' | '/assets' | '/login' | '/more' | '/stats'
+  id: '__root__' | '/' | '/about' | '/assets' | '/login' | '/more' | '/stats'
   fileRoutesById: FileRoutesById
 }
 
@@ -153,18 +153,18 @@ export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   AboutLazyRoute: typeof AboutLazyRoute
   AssetsLazyRoute: typeof AssetsLazyRoute
+  LoginLazyRoute: typeof LoginLazyRoute
   MoreLazyRoute: typeof MoreLazyRoute
   StatsLazyRoute: typeof StatsLazyRoute
-  WalletLazyRoute: typeof WalletLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   AboutLazyRoute: AboutLazyRoute,
   AssetsLazyRoute: AssetsLazyRoute,
+  LoginLazyRoute: LoginLazyRoute,
   MoreLazyRoute: MoreLazyRoute,
   StatsLazyRoute: StatsLazyRoute,
-  WalletLazyRoute: WalletLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -180,9 +180,9 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/assets",
+        "/login",
         "/more",
-        "/stats",
-        "/wallet"
+        "/stats"
       ]
     },
     "/": {
@@ -194,14 +194,14 @@ export const routeTree = rootRoute
     "/assets": {
       "filePath": "assets.lazy.tsx"
     },
+    "/login": {
+      "filePath": "login.lazy.tsx"
+    },
     "/more": {
       "filePath": "more.lazy.tsx"
     },
     "/stats": {
       "filePath": "stats.lazy.tsx"
-    },
-    "/wallet": {
-      "filePath": "wallet.lazy.tsx"
     }
   }
 }

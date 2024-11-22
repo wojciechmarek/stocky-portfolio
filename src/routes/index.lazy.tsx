@@ -11,12 +11,13 @@ import {
 } from "@material-tailwind/react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { CommonHeader } from "../components/molecules";
 
 export const Route = createLazyFileRoute("/" as never)({
-  component: Index,
+  component: RouteComponent,
 });
 
-function Index() {
+function RouteComponent() {
   const [open, setOpen] = useState(1);
 
   const stats = [
@@ -50,25 +51,6 @@ function Index() {
 
   return (
     <>
-      <div className="flex flex-row mx-3 mt-6 items-center justify-between">
-        <h1 className="font-bold text-3xl">Overview</h1>
-        <div className="flex flex-row gap-1 items-center">
-          <Button className="bg-transparent p-3 ">
-            <div className="h-6 w-6">
-              <Search />
-            </div>
-          </Button>
-          <Button className="bg-transparent p-3 ">
-            <div className="h-6 w-6">
-              <Bell />
-            </div>
-          </Button>
-          <Button className="bg-transparent p-2 ">
-            <div className="h-8 w-8 bg-red-300 rounded-full"></div>
-          </Button>
-        </div>
-      </div>
-
       <div className="grid mt-6 grid-cols-2 gap-2 mx-3">
         {stats.map((stat) => (
           <div

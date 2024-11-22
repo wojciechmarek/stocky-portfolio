@@ -1,9 +1,15 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
+import { CommonHeader } from "../components/molecules";
 
 export const Route = createLazyFileRoute("/about" as never)({
-  component: About,
+  component: RouteComponent,
 });
 
-function About() {
-  return <div className="p-2">Hello from About!</div>;
+function RouteComponent() {
+  return (
+    <div className="p-2">
+      <CommonHeader />
+      Hello from About!
+    </div>
+  );
 }
