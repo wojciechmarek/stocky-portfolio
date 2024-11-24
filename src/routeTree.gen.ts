@@ -17,6 +17,7 @@ import { Route as rootRoute } from './routes/__root'
 // Create Virtual Routes
 
 const StatsLazyImport = createFileRoute('/stats')()
+const ProfileLazyImport = createFileRoute('/profile')()
 const MoreLazyImport = createFileRoute('/more')()
 const LoginLazyImport = createFileRoute('/login')()
 const AssetsLazyImport = createFileRoute('/assets')()
@@ -30,6 +31,12 @@ const StatsLazyRoute = StatsLazyImport.update({
   path: '/stats',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/stats.lazy').then((d) => d.Route))
+
+const ProfileLazyRoute = ProfileLazyImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/profile.lazy').then((d) => d.Route))
 
 const MoreLazyRoute = MoreLazyImport.update({
   id: '/more',
@@ -100,6 +107,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoreLazyImport
       parentRoute: typeof rootRoute
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/stats': {
       id: '/stats'
       path: '/stats'
@@ -118,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/assets': typeof AssetsLazyRoute
   '/login': typeof LoginLazyRoute
   '/more': typeof MoreLazyRoute
+  '/profile': typeof ProfileLazyRoute
   '/stats': typeof StatsLazyRoute
 }
 
@@ -127,6 +142,7 @@ export interface FileRoutesByTo {
   '/assets': typeof AssetsLazyRoute
   '/login': typeof LoginLazyRoute
   '/more': typeof MoreLazyRoute
+  '/profile': typeof ProfileLazyRoute
   '/stats': typeof StatsLazyRoute
 }
 
@@ -137,15 +153,31 @@ export interface FileRoutesById {
   '/assets': typeof AssetsLazyRoute
   '/login': typeof LoginLazyRoute
   '/more': typeof MoreLazyRoute
+  '/profile': typeof ProfileLazyRoute
   '/stats': typeof StatsLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/assets' | '/login' | '/more' | '/stats'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/assets'
+    | '/login'
+    | '/more'
+    | '/profile'
+    | '/stats'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/assets' | '/login' | '/more' | '/stats'
-  id: '__root__' | '/' | '/about' | '/assets' | '/login' | '/more' | '/stats'
+  to: '/' | '/about' | '/assets' | '/login' | '/more' | '/profile' | '/stats'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/assets'
+    | '/login'
+    | '/more'
+    | '/profile'
+    | '/stats'
   fileRoutesById: FileRoutesById
 }
 
@@ -155,6 +187,7 @@ export interface RootRouteChildren {
   AssetsLazyRoute: typeof AssetsLazyRoute
   LoginLazyRoute: typeof LoginLazyRoute
   MoreLazyRoute: typeof MoreLazyRoute
+  ProfileLazyRoute: typeof ProfileLazyRoute
   StatsLazyRoute: typeof StatsLazyRoute
 }
 
@@ -164,6 +197,7 @@ const rootRouteChildren: RootRouteChildren = {
   AssetsLazyRoute: AssetsLazyRoute,
   LoginLazyRoute: LoginLazyRoute,
   MoreLazyRoute: MoreLazyRoute,
+  ProfileLazyRoute: ProfileLazyRoute,
   StatsLazyRoute: StatsLazyRoute,
 }
 
@@ -182,6 +216,7 @@ export const routeTree = rootRoute
         "/assets",
         "/login",
         "/more",
+        "/profile",
         "/stats"
       ]
     },
@@ -199,6 +234,9 @@ export const routeTree = rootRoute
     },
     "/more": {
       "filePath": "more.lazy.tsx"
+    },
+    "/profile": {
+      "filePath": "profile.lazy.tsx"
     },
     "/stats": {
       "filePath": "stats.lazy.tsx"

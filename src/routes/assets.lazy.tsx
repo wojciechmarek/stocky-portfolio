@@ -1,6 +1,4 @@
-import Button from "@material-tailwind/react/components/Button";
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { Bell, Search } from "lucide-react";
 
 import {
   Tabs,
