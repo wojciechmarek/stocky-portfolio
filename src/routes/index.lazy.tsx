@@ -1,17 +1,14 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { Bell, Search } from "lucide-react";
 import checkIcon from "../assets/check.svg";
-
-import { Button } from "@material-tailwind/react";
 
 import {
   Accordion,
+  Button,
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { CommonHeader } from "../components/molecules";
 
 export const Route = createLazyFileRoute("/" as never)({
   component: RouteComponent,
