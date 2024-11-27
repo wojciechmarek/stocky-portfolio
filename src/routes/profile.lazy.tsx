@@ -1,11 +1,6 @@
-import {
-  Button,
-  Drawer,
-  IconButton,
-  Typography,
-} from "@material-tailwind/react";
+import { Button, Drawer, Typography } from "@material-tailwind/react";
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { CreditCard, Languages, Moon } from "lucide-react";
+import { CreditCard, Languages, Moon, X } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createLazyFileRoute("/profile")({
@@ -32,6 +27,20 @@ function RouteComponent() {
       name: "Language",
       description: "Change the app theme",
     },
+  ];
+
+  const colors = [
+    "bg-[#5743f4]",
+    "bg-[#548efb]",
+    "bg-[#519eba]",
+    "bg-[#11bc95]",
+    "bg-[#02ba63]",
+    "bg-[#e4a32f]",
+    "bg-[#e74b1f]",
+    "bg-[#df2684]",
+    "bg-[#db00e6]",
+    "bg-[#9400e8]",
+    "bg-[#6d00e7]",
   ];
 
   const [openBottom, setOpenBottom] = useState(false);
@@ -80,44 +89,39 @@ function RouteComponent() {
 
       <Drawer
         placement="bottom"
+        size={550}
         open={openBottom}
         onClose={closeDrawerBottom}
-        className="p-4"
+        className="p-4 bg-[#121413] rounded-tl-3xl rounded-tr-3xl"
       >
-        <div className="mb-6 flex items-center justify-between">
-          <Typography variant="h5" color="blue-gray">
-            Material Tailwind
-          </Typography>
-          <IconButton
-            variant="text"
-            color="blue-gray"
-            onClick={closeDrawerBottom}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-5 w-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </IconButton>
+        <div className="mb-4 flex items-center justify-between ">
+          <Typography variant="h3">Theme</Typography>
+          <X onClick={closeDrawerBottom} />
         </div>
-        <Typography color="gray" className="mb-8 pr-4 font-normal">
-          Material Tailwind features multiple React and HTML components, all
-          written with Tailwind CSS classes and Material Design guidelines.
+        <Typography className="mb-2 pr-4 font-normal">
+          Select a default theme
         </Typography>
-        <div className="flex gap-2">
-          <Button size="sm" variant="outlined">
-            Documentation
+        <div className="flex flex-row gap-2">
+          <Button className="p-1">
+            <div className="w-20 h-16 bg-gradient-to-br from-gray-400 via-gray-50 to-gray-400 rounded-md" />
           </Button>
-          <Button size="sm">Get Started</Button>
+          <Button className="p-1">
+            <div className="w-20 h-16 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-md" />
+          </Button>
+          <Button className="p-1">
+            <div className="w-20 h-16 bg-gradient-to-br from-gray-400 via-gray-500 to-gray-900 rounded-md" />
+          </Button>
+        </div>
+
+        <Typography className="mb-2 mt-4 pr-4 font-normal">
+          Pick an accent color
+        </Typography>
+        <div className="flex flex-row gap-1 flex-wrap">
+          {colors.map((color) => (
+            <Button className="p-1 rounded-full" key={color}>
+              <div className={`w-8 h-8 rounded-full ${color}`} />
+            </Button>
+          ))}
         </div>
       </Drawer>
     </>
