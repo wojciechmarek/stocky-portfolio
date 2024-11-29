@@ -1,6 +1,6 @@
 import { Button, Drawer, Typography } from "@material-tailwind/react";
-import { createLazyFileRoute } from "@tanstack/react-router";
-import { CreditCard, Languages, Moon, X } from "lucide-react";
+import { createLazyFileRoute, Link } from "@tanstack/react-router";
+import { ChevronLeft, CreditCard, Languages, Moon, X } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createLazyFileRoute("/profile")({
@@ -52,16 +52,36 @@ function RouteComponent() {
     openDrawerBottom();
   };
 
+  const handleOnThemeChangeClick = (theme: string) => {
+    if (theme === "dark") {
+      document?.querySelector("body")?.setAttribute("data-theme", theme);
+      return;
+    }
+
+    if (theme === "light") {
+      document?.querySelector("body")?.setAttribute("data-theme", theme);
+    }
+  };
+
   return (
     <>
-      <div className="mx-3">
-        <div className="flex flex-row justify-evenly items-center">
-          <div className="flex flex-col justify-start w-3/5">
-            <h3 className="text-4xl font-bold">Johnantan Doe Theodore</h3>
-            <span className="bg-blue-600 rounded-lg px-4">Basic plan</span>
+      <div className="flex flex-row mx-3 mt-6 items-center justify-between">
+        <Link to={"/"}>
+          <Button className="bg-transparent p-3 ">
+            <div className="h-6 w-6">
+              <ChevronLeft />
+            </div>
+          </Button>
+        </Link>
+      </div>
+      <div className="mx-3 mt-6">
+        <div className="flex flex-col justify-evenly items-center">
+          <div className="flex justify-center">
+            <div className="rounded-full h-36 w-36 bg-red-300" />
           </div>
-          <div className="flex justify-center items-center">
-            <div className="rounded-full h-24 w-24 bg-red-300" />
+          <div className="flex flex-col mx-auto mt-2 ">
+            <h3 className="text-4xl font-bold">Johnantan Doe</h3>
+            <span className="bg-blue-600 rounded-lg px-4">Basic plan</span>
           </div>
         </div>
       </div>
@@ -102,10 +122,16 @@ function RouteComponent() {
           Select a default theme
         </Typography>
         <div className="flex flex-row gap-2">
-          <Button className="p-1">
+          <Button
+            className="p-1"
+            onClick={() => handleOnThemeChangeClick("light")}
+          >
             <div className="w-20 h-16 bg-gradient-to-br from-gray-400 via-gray-50 to-gray-400 rounded-md" />
           </Button>
-          <Button className="p-1">
+          <Button
+            className="p-1"
+            onClick={() => handleOnThemeChangeClick("dark")}
+          >
             <div className="w-20 h-16 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-md" />
           </Button>
           <Button className="p-1">

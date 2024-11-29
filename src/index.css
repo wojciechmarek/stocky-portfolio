@@ -11,11 +11,16 @@
   font-weight: 400;
   font-style: normal;
 
-  color: #ffffffde;
-  background-color: #020202;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --background-color: #0a0a0a;
+  --font-color: #ffffffde;
+}
+
+[data-theme="light"] {
+  --background-color: #ffffff;
+  --font-color: #252529;
 }

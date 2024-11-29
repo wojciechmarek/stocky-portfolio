@@ -9,9 +9,9 @@ import {
 
 export const MobileBottomNavigation = () => {
   return (
-    <div className="bg-[#121413] h-16 flex items-center justify-evenly p-2">
+    <div className="bg-[#1b1b1b] h-16 flex items-center justify-evenly p-2">
       <Link to="/" className="group [&.active]:font-bold">
-        <Button className="bg-transparent group-[&.active]:bg-[#1e201f] rounded-full flex items-center normal-case">
+        <Button className="bg-transparent group-[&.active]:bg-[#272727] rounded-full flex items-center normal-case">
           <div className="h-6 w-6 flex">
             <House />
           </div>
