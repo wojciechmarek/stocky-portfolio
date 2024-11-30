@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/index'
 
 // Create Virtual Routes
 
@@ -28,6 +29,12 @@ const appAssetsLazyImport = createFileRoute('/(app)/assets')()
 const appAboutLazyImport = createFileRoute('/(app)/about')()
 
 // Create/Update Routes
+
+const IndexRoute = IndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const profileSettingsLazyRoute = profileSettingsLazyImport
   .update({
@@ -99,6 +106,13 @@ const appAboutLazyRoute = appAboutLazyImport
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/(app)/about': {
       id: '/(app)/about'
       path: '/about'
@@ -161,6 +175,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/about': typeof appAboutLazyRoute
   '/assets': typeof appAssetsLazyRoute
   '/overview': typeof appOverviewLazyRoute
@@ -172,6 +187,7 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/about': typeof appAboutLazyRoute
   '/assets': typeof appAssetsLazyRoute
   '/overview': typeof appOverviewLazyRoute
@@ -184,6 +200,7 @@ export interface FileRoutesByTo {
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/': typeof IndexRoute
   '/(app)/about': typeof appAboutLazyRoute
   '/(app)/assets': typeof appAssetsLazyRoute
   '/(app)/overview': typeof appOverviewLazyRoute
@@ -197,6 +214,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/about'
     | '/assets'
     | '/overview'
@@ -207,6 +225,7 @@ export interface FileRouteTypes {
     | '/settings'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/'
     | '/about'
     | '/assets'
     | '/overview'
@@ -217,6 +236,7 @@ export interface FileRouteTypes {
     | '/settings'
   id:
     | '__root__'
+    | '/'
     | '/(app)/about'
     | '/(app)/assets'
     | '/(app)/overview'
@@ -229,6 +249,7 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   appAboutLazyRoute: typeof appAboutLazyRoute
   appAssetsLazyRoute: typeof appAssetsLazyRoute
   appOverviewLazyRoute: typeof appOverviewLazyRoute
@@ -240,6 +261,7 @@ export interface RootRouteChildren {
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   appAboutLazyRoute: appAboutLazyRoute,
   appAssetsLazyRoute: appAssetsLazyRoute,
   appOverviewLazyRoute: appOverviewLazyRoute,
@@ -260,6 +282,7 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/",
         "/(app)/about",
         "/(app)/assets",
         "/(app)/overview",
@@ -269,6 +292,9 @@ export const routeTree = rootRoute
         "/(profile)/notifications",
         "/(profile)/settings"
       ]
+    },
+    "/": {
+      "filePath": "index.tsx"
     },
     "/(app)/about": {
       "filePath": "(app)/about.lazy.tsx"
