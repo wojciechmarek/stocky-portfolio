@@ -6,7 +6,7 @@ export const Route = createRootRoute({
   component: () => (
     <>
       <ToastContainer transition={Flip} />
-      <main className="flex flex-col h-screen bg-background-color text-font-color">
+      <main className="h-screen bg-primary-bg-color text-primary-font-color">
         <Outlet />
       </main>
       <TanStackRouterDevtools />

@@ -6,8 +6,12 @@ export default withMT({
   theme: {
     extend: {
       colors: {
-        "background-color": "var(--background-color)",
-        "font-color": "var(--font-color)",
+        "primary-bg-color": "var(--primary-bg-color)",
+        "secondary-bg-color": "var(--secondary-bg-color)",
+
+        "primary-font-color": "var(--primary-font-color)",
+        "contrast-font-color": "var(--contrast-font-color)",
+        "dimmed-font-color": "var(--dimmed-font-color)",
       },
     },
     fontFamily: {

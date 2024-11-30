@@ -1,72 +1,85 @@
-import { Button, Drawer, Typography } from '@material-tailwind/react'
-import { createLazyFileRoute, Link } from '@tanstack/react-router'
-import { ChevronLeft, CreditCard, Languages, Moon, X } from 'lucide-react'
-import { useState } from 'react'
+import { Button, Drawer, Typography } from "@material-tailwind/react";
+import { createLazyFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import {
+  ChevronLeft,
+  CreditCard,
+  Languages,
+  LogOut,
+  Moon,
+  X,
+} from "lucide-react";
+import { useState } from "react";
 
-export const Route = createLazyFileRoute('/profile/')({
+export const Route = createLazyFileRoute("/(profile)/settings")({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
+  const navigate = useNavigate();
+
   const settings = [
     {
       icon: <Moon />,
-      color: 'bg-gray-700',
-      name: 'Theme',
-      description: 'Change the app theme',
+      color: "bg-gray-700",
+      name: "Theme",
+      description: "Change the app theme",
     },
     {
       icon: <CreditCard />,
-      color: 'bg-green-500',
-      name: 'Subscription',
-      description: 'Change the app theme',
+      color: "bg-green-500",
+      name: "Subscription",
+      description: "Change the app theme",
     },
     {
       icon: <Languages />,
-      color: 'bg-blue-500',
-      name: 'Language',
-      description: 'Change the app theme',
+      color: "bg-blue-500",
+      name: "Language",
+      description: "Change the app theme",
     },
-  ]
+  ];
 
   const colors = [
-    'bg-[#5743f4]',
-    'bg-[#548efb]',
-    'bg-[#519eba]',
-    'bg-[#11bc95]',
-    'bg-[#02ba63]',
-    'bg-[#e4a32f]',
-    'bg-[#e74b1f]',
-    'bg-[#df2684]',
-    'bg-[#db00e6]',
-    'bg-[#9400e8]',
-    'bg-[#6d00e7]',
-  ]
+    "bg-[#5743f4]",
+    "bg-[#548efb]",
+    "bg-[#519eba]",
+    "bg-[#11bc95]",
+    "bg-[#02ba63]",
+    "bg-[#e4a32f]",
+    "bg-[#e74b1f]",
+    "bg-[#df2684]",
+    "bg-[#db00e6]",
+    "bg-[#9400e8]",
+    "bg-[#6d00e7]",
+  ];
 
-  const [openBottom, setOpenBottom] = useState(false)
+  const [openBottom, setOpenBottom] = useState(false);
 
-  const openDrawerBottom = () => setOpenBottom(true)
-  const closeDrawerBottom = () => setOpenBottom(false)
+  const openDrawerBottom = () => setOpenBottom(true);
+  const closeDrawerBottom = () => setOpenBottom(false);
 
   const handleInSettingButtonClick = () => {
-    openDrawerBottom()
-  }
+    openDrawerBottom();
+  };
+
+  const handleLogOutButtonClick = () => {
+    navigate({ to: "/login" });
+  };
 
   const handleOnThemeChangeClick = (theme: string) => {
-    if (theme === 'dark') {
-      document?.querySelector('body')?.setAttribute('data-theme', theme)
-      return
+    if (theme === "dark") {
+      document?.querySelector("body")?.setAttribute("data-theme", theme);
+      return;
     }
 
-    if (theme === 'light') {
-      document?.querySelector('body')?.setAttribute('data-theme', theme)
+    if (theme === "light") {
+      document?.querySelector("body")?.setAttribute("data-theme", theme);
     }
-  }
+  };
 
   return (
-    <>
+    <div className="flex flex-col">
       <div className="flex flex-row mx-3 mt-6 items-center justify-between">
-        <Link to={'/'}>
+        <Link to={"/overview"}>
           <Button className="bg-transparent p-3 ">
             <div className="h-6 w-6">
               <ChevronLeft />
@@ -86,10 +99,11 @@ function RouteComponent() {
         </div>
       </div>
       <div className="mx-3 flex flex-col mt-12 gap-2">
+        <p className="ml-1 text-dimmed-font-color">Basic</p>
         {settings.map((setting) => (
           <Button
             onClick={handleInSettingButtonClick}
-            className="bg-[#121413] flex flex-row rounded-lg px-4 py-1 normal-case items-center"
+            className="bg-[#121413] flex flex-row rounded-2xl px-4 py-1 normal-case items-center"
             key={setting.name}
           >
             <div className="">
@@ -101,10 +115,29 @@ function RouteComponent() {
             </div>
             <div className="flex flex-col py-2 text-left ml-4">
               <p className="text-lg">{setting.name}</p>
-              <p className="text-xs text-gray-400">{setting.description}</p>
+              <p className="text-xs text-dimmed-font-color">
+                {setting.description}
+              </p>
             </div>
           </Button>
         ))}
+        <p className="ml-1 mt-3 text-dimmed-font-color">Account</p>
+        <Button
+          onClick={handleLogOutButtonClick}
+          className="bg-[#121413] flex flex-row rounded-2xl px-4 py-1 normal-case items-center"
+        >
+          <div className="">
+            <div
+              className={`w-10 h-10 bg-red-500 rounded-full flex justify-center items-center`}
+            >
+              <LogOut />
+            </div>
+          </div>
+          <div className="flex flex-col py-2 text-left ml-4">
+            <p className="text-lg">Logout</p>
+            <p className="text-xs text-dimmed-font-color">End the session</p>
+          </div>
+        </Button>
       </div>
 
       <Drawer
@@ -124,13 +157,13 @@ function RouteComponent() {
         <div className="flex flex-row gap-2">
           <Button
             className="p-1"
-            onClick={() => handleOnThemeChangeClick('light')}
+            onClick={() => handleOnThemeChangeClick("light")}
           >
             <div className="w-20 h-16 bg-gradient-to-br from-gray-400 via-gray-50 to-gray-400 rounded-md" />
           </Button>
           <Button
             className="p-1"
-            onClick={() => handleOnThemeChangeClick('dark')}
+            onClick={() => handleOnThemeChangeClick("dark")}
           >
             <div className="w-20 h-16 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-md" />
           </Button>
@@ -150,6 +183,6 @@ function RouteComponent() {
           ))}
         </div>
       </Drawer>
-    </>
-  )
+    </div>
+  );
 }

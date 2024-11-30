@@ -13,52 +13,53 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as authLayoutImport } from './routes/(auth)/_layout'
 
 // Create Virtual Routes
 
-const authImport = createFileRoute('/(auth)')()
-const IndexLazyImport = createFileRoute('/')()
-const ProfileIndexLazyImport = createFileRoute('/profile/')()
+const profileSettingsLazyImport = createFileRoute('/(profile)/settings')()
+const profileNotificationsLazyImport = createFileRoute(
+  '/(profile)/notifications',
+)()
 const authRegisterLazyImport = createFileRoute('/(auth)/register')()
 const authLoginLazyImport = createFileRoute('/(auth)/login')()
 const appStatsLazyImport = createFileRoute('/(app)/stats')()
-const appProfileLazyImport = createFileRoute('/(app)/profile')()
+const appOverviewLazyImport = createFileRoute('/(app)/overview')()
 const appAssetsLazyImport = createFileRoute('/(app)/assets')()
 const appAboutLazyImport = createFileRoute('/(app)/about')()
 
 // Create/Update Routes
 
-const authRoute = authImport.update({
-  id: '/(auth)',
-  getParentRoute: () => rootRoute,
-} as any)
+const profileSettingsLazyRoute = profileSettingsLazyImport
+  .update({
+    id: '/(profile)/settings',
+    path: '/settings',
+    getParentRoute: () => rootRoute,
+  } as any)
+  .lazy(() => import('./routes/(profile)/settings.lazy').then((d) => d.Route))
 
-const IndexLazyRoute = IndexLazyImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
-
-const ProfileIndexLazyRoute = ProfileIndexLazyImport.update({
-  id: '/profile/',
-  path: '/profile/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/profile/index.lazy').then((d) => d.Route))
+const profileNotificationsLazyRoute = profileNotificationsLazyImport
+  .update({
+    id: '/(profile)/notifications',
+    path: '/notifications',
+    getParentRoute: () => rootRoute,
+  } as any)
+  .lazy(() =>
+    import('./routes/(profile)/notifications.lazy').then((d) => d.Route),
+  )
 
 const authRegisterLazyRoute = authRegisterLazyImport
   .update({
-    id: '/register',
+    id: '/(auth)/register',
     path: '/register',
-    getParentRoute: () => authRoute,
+    getParentRoute: () => rootRoute,
   } as any)
   .lazy(() => import('./routes/(auth)/register.lazy').then((d) => d.Route))
 
 const authLoginLazyRoute = authLoginLazyImport
   .update({
-    id: '/login',
+    id: '/(auth)/login',
     path: '/login',
-    getParentRoute: () => authRoute,
+    getParentRoute: () => rootRoute,
   } as any)
   .lazy(() => import('./routes/(auth)/login.lazy').then((d) => d.Route))
 
@@ -70,13 +71,13 @@ const appStatsLazyRoute = appStatsLazyImport
   } as any)
   .lazy(() => import('./routes/(app)/stats.lazy').then((d) => d.Route))
 
-const appProfileLazyRoute = appProfileLazyImport
+const appOverviewLazyRoute = appOverviewLazyImport
   .update({
-    id: '/(app)/profile',
-    path: '/profile',
+    id: '/(app)/overview',
+    path: '/overview',
     getParentRoute: () => rootRoute,
   } as any)
-  .lazy(() => import('./routes/(app)/profile.lazy').then((d) => d.Route))
+  .lazy(() => import('./routes/(app)/overview.lazy').then((d) => d.Route))
 
 const appAssetsLazyRoute = appAssetsLazyImport
   .update({
@@ -94,36 +95,10 @@ const appAboutLazyRoute = appAboutLazyImport
   } as any)
   .lazy(() => import('./routes/(app)/about.lazy').then((d) => d.Route))
 
-const authLayoutRoute = authLayoutImport.update({
-  id: '/_layout',
-  getParentRoute: () => authRoute,
-} as any)
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)': {
-      id: '/(auth)'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof authImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/_layout': {
-      id: '/(auth)/_layout'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof authLayoutImport
-      parentRoute: typeof authRoute
-    }
     '/(app)/about': {
       id: '/(app)/about'
       path: '/about'
@@ -138,11 +113,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appAssetsLazyImport
       parentRoute: typeof rootRoute
     }
-    '/(app)/profile': {
-      id: '/(app)/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof appProfileLazyImport
+    '/(app)/overview': {
+      id: '/(app)/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof appOverviewLazyImport
       parentRoute: typeof rootRoute
     }
     '/(app)/stats': {
@@ -157,20 +132,27 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof authLoginLazyImport
-      parentRoute: typeof authImport
+      parentRoute: typeof rootRoute
     }
     '/(auth)/register': {
       id: '/(auth)/register'
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof authRegisterLazyImport
-      parentRoute: typeof authImport
+      parentRoute: typeof rootRoute
     }
-    '/profile/': {
-      id: '/profile/'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileIndexLazyImport
+    '/(profile)/notifications': {
+      id: '/(profile)/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof profileNotificationsLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/(profile)/settings': {
+      id: '/(profile)/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof profileSettingsLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -178,106 +160,94 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-interface authRouteChildren {
-  authLayoutRoute: typeof authLayoutRoute
-  authLoginLazyRoute: typeof authLoginLazyRoute
-  authRegisterLazyRoute: typeof authRegisterLazyRoute
-}
-
-const authRouteChildren: authRouteChildren = {
-  authLayoutRoute: authLayoutRoute,
-  authLoginLazyRoute: authLoginLazyRoute,
-  authRegisterLazyRoute: authRegisterLazyRoute,
-}
-
-const authRouteWithChildren = authRoute._addFileChildren(authRouteChildren)
-
 export interface FileRoutesByFullPath {
-  '/': typeof authLayoutRoute
   '/about': typeof appAboutLazyRoute
   '/assets': typeof appAssetsLazyRoute
-  '/profile': typeof ProfileIndexLazyRoute
+  '/overview': typeof appOverviewLazyRoute
   '/stats': typeof appStatsLazyRoute
   '/login': typeof authLoginLazyRoute
   '/register': typeof authRegisterLazyRoute
+  '/notifications': typeof profileNotificationsLazyRoute
+  '/settings': typeof profileSettingsLazyRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof authLayoutRoute
   '/about': typeof appAboutLazyRoute
   '/assets': typeof appAssetsLazyRoute
-  '/profile': typeof ProfileIndexLazyRoute
+  '/overview': typeof appOverviewLazyRoute
   '/stats': typeof appStatsLazyRoute
   '/login': typeof authLoginLazyRoute
   '/register': typeof authRegisterLazyRoute
+  '/notifications': typeof profileNotificationsLazyRoute
+  '/settings': typeof profileSettingsLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexLazyRoute
-  '/(auth)': typeof authRouteWithChildren
-  '/(auth)/_layout': typeof authLayoutRoute
   '/(app)/about': typeof appAboutLazyRoute
   '/(app)/assets': typeof appAssetsLazyRoute
-  '/(app)/profile': typeof appProfileLazyRoute
+  '/(app)/overview': typeof appOverviewLazyRoute
   '/(app)/stats': typeof appStatsLazyRoute
   '/(auth)/login': typeof authLoginLazyRoute
   '/(auth)/register': typeof authRegisterLazyRoute
-  '/profile/': typeof ProfileIndexLazyRoute
+  '/(profile)/notifications': typeof profileNotificationsLazyRoute
+  '/(profile)/settings': typeof profileSettingsLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/about'
     | '/assets'
-    | '/profile'
+    | '/overview'
     | '/stats'
     | '/login'
     | '/register'
+    | '/notifications'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/about'
     | '/assets'
-    | '/profile'
+    | '/overview'
     | '/stats'
     | '/login'
     | '/register'
+    | '/notifications'
+    | '/settings'
   id:
     | '__root__'
-    | '/'
-    | '/(auth)'
-    | '/(auth)/_layout'
     | '/(app)/about'
     | '/(app)/assets'
-    | '/(app)/profile'
+    | '/(app)/overview'
     | '/(app)/stats'
     | '/(auth)/login'
     | '/(auth)/register'
-    | '/profile/'
+    | '/(profile)/notifications'
+    | '/(profile)/settings'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexLazyRoute: typeof IndexLazyRoute
-  authRoute: typeof authRouteWithChildren
   appAboutLazyRoute: typeof appAboutLazyRoute
   appAssetsLazyRoute: typeof appAssetsLazyRoute
-  appProfileLazyRoute: typeof appProfileLazyRoute
+  appOverviewLazyRoute: typeof appOverviewLazyRoute
   appStatsLazyRoute: typeof appStatsLazyRoute
-  ProfileIndexLazyRoute: typeof ProfileIndexLazyRoute
+  authLoginLazyRoute: typeof authLoginLazyRoute
+  authRegisterLazyRoute: typeof authRegisterLazyRoute
+  profileNotificationsLazyRoute: typeof profileNotificationsLazyRoute
+  profileSettingsLazyRoute: typeof profileSettingsLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexLazyRoute: IndexLazyRoute,
-  authRoute: authRouteWithChildren,
   appAboutLazyRoute: appAboutLazyRoute,
   appAssetsLazyRoute: appAssetsLazyRoute,
-  appProfileLazyRoute: appProfileLazyRoute,
+  appOverviewLazyRoute: appOverviewLazyRoute,
   appStatsLazyRoute: appStatsLazyRoute,
-  ProfileIndexLazyRoute: ProfileIndexLazyRoute,
+  authLoginLazyRoute: authLoginLazyRoute,
+  authRegisterLazyRoute: authRegisterLazyRoute,
+  profileNotificationsLazyRoute: profileNotificationsLazyRoute,
+  profileSettingsLazyRoute: profileSettingsLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -290,29 +260,15 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/(auth)",
         "/(app)/about",
         "/(app)/assets",
-        "/(app)/profile",
+        "/(app)/overview",
         "/(app)/stats",
-        "/profile/"
-      ]
-    },
-    "/": {
-      "filePath": "index.lazy.tsx"
-    },
-    "/(auth)": {
-      "filePath": "(auth)",
-      "children": [
-        "/(auth)/_layout",
         "/(auth)/login",
-        "/(auth)/register"
+        "/(auth)/register",
+        "/(profile)/notifications",
+        "/(profile)/settings"
       ]
-    },
-    "/(auth)/_layout": {
-      "filePath": "(auth)/_layout.tsx",
-      "parent": "/(auth)"
     },
     "/(app)/about": {
       "filePath": "(app)/about.lazy.tsx"
@@ -320,22 +276,23 @@ export const routeTree = rootRoute
     "/(app)/assets": {
       "filePath": "(app)/assets.lazy.tsx"
     },
-    "/(app)/profile": {
-      "filePath": "(app)/profile.lazy.tsx"
+    "/(app)/overview": {
+      "filePath": "(app)/overview.lazy.tsx"
     },
     "/(app)/stats": {
       "filePath": "(app)/stats.lazy.tsx"
     },
     "/(auth)/login": {
-      "filePath": "(auth)/login.lazy.tsx",
-      "parent": "/(auth)"
+      "filePath": "(auth)/login.lazy.tsx"
     },
     "/(auth)/register": {
-      "filePath": "(auth)/register.lazy.tsx",
-      "parent": "/(auth)"
+      "filePath": "(auth)/register.lazy.tsx"
     },
-    "/profile/": {
-      "filePath": "profile/index.lazy.tsx"
+    "/(profile)/notifications": {
+      "filePath": "(profile)/notifications.lazy.tsx"
+    },
+    "/(profile)/settings": {
+      "filePath": "(profile)/settings.lazy.tsx"
     }
   }
 }
