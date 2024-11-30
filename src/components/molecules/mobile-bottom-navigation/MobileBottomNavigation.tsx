@@ -34,7 +34,7 @@ export const MobileBottomNavigation = () => {
           <p className="ml-3 hidden group-[&.active]:block">Stats</p>
         </Button>
       </Link>
-      <Link to="/more" className="group [&.active]:font-bold">
+      <Link to="/assets" className="group [&.active]:font-bold">
         <Button className="bg-transparent group-[&.active]:bg-[#1e201f] rounded-full flex items-center normal-case">
           <div className="h-6 w-6 flex">
             <Ellipsis />
