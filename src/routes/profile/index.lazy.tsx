@@ -1,72 +1,72 @@
-import { Button, Drawer, Typography } from "@material-tailwind/react";
-import { createLazyFileRoute, Link } from "@tanstack/react-router";
-import { ChevronLeft, CreditCard, Languages, Moon, X } from "lucide-react";
-import { useState } from "react";
+import { Button, Drawer, Typography } from '@material-tailwind/react'
+import { createLazyFileRoute, Link } from '@tanstack/react-router'
+import { ChevronLeft, CreditCard, Languages, Moon, X } from 'lucide-react'
+import { useState } from 'react'
 
-export const Route = createLazyFileRoute("/profile")({
+export const Route = createLazyFileRoute('/profile/')({
   component: RouteComponent,
-});
+})
 
 function RouteComponent() {
   const settings = [
     {
       icon: <Moon />,
-      color: "bg-gray-700",
-      name: "Theme",
-      description: "Change the app theme",
+      color: 'bg-gray-700',
+      name: 'Theme',
+      description: 'Change the app theme',
     },
     {
       icon: <CreditCard />,
-      color: "bg-green-500",
-      name: "Subscription",
-      description: "Change the app theme",
+      color: 'bg-green-500',
+      name: 'Subscription',
+      description: 'Change the app theme',
     },
     {
       icon: <Languages />,
-      color: "bg-blue-500",
-      name: "Language",
-      description: "Change the app theme",
+      color: 'bg-blue-500',
+      name: 'Language',
+      description: 'Change the app theme',
     },
-  ];
+  ]
 
   const colors = [
-    "bg-[#5743f4]",
-    "bg-[#548efb]",
-    "bg-[#519eba]",
-    "bg-[#11bc95]",
-    "bg-[#02ba63]",
-    "bg-[#e4a32f]",
-    "bg-[#e74b1f]",
-    "bg-[#df2684]",
-    "bg-[#db00e6]",
-    "bg-[#9400e8]",
-    "bg-[#6d00e7]",
-  ];
+    'bg-[#5743f4]',
+    'bg-[#548efb]',
+    'bg-[#519eba]',
+    'bg-[#11bc95]',
+    'bg-[#02ba63]',
+    'bg-[#e4a32f]',
+    'bg-[#e74b1f]',
+    'bg-[#df2684]',
+    'bg-[#db00e6]',
+    'bg-[#9400e8]',
+    'bg-[#6d00e7]',
+  ]
 
-  const [openBottom, setOpenBottom] = useState(false);
+  const [openBottom, setOpenBottom] = useState(false)
 
-  const openDrawerBottom = () => setOpenBottom(true);
-  const closeDrawerBottom = () => setOpenBottom(false);
+  const openDrawerBottom = () => setOpenBottom(true)
+  const closeDrawerBottom = () => setOpenBottom(false)
 
   const handleInSettingButtonClick = () => {
-    openDrawerBottom();
-  };
+    openDrawerBottom()
+  }
 
   const handleOnThemeChangeClick = (theme: string) => {
-    if (theme === "dark") {
-      document?.querySelector("body")?.setAttribute("data-theme", theme);
-      return;
+    if (theme === 'dark') {
+      document?.querySelector('body')?.setAttribute('data-theme', theme)
+      return
     }
 
-    if (theme === "light") {
-      document?.querySelector("body")?.setAttribute("data-theme", theme);
+    if (theme === 'light') {
+      document?.querySelector('body')?.setAttribute('data-theme', theme)
     }
-  };
+  }
 
   return (
     <>
       <div className="flex flex-row mx-3 mt-6 items-center justify-between">
-        <Link to={"/"}>
+        <Link to={'/'}>
           <Button className="bg-transparent p-3 ">
             <div className="h-6 w-6">
               <ChevronLeft />
@@ -124,13 +124,13 @@ function RouteComponent() {
         <div className="flex flex-row gap-2">
           <Button
             className="p-1"
-            onClick={() => handleOnThemeChangeClick("light")}
+            onClick={() => handleOnThemeChangeClick('light')}
           >
             <div className="w-20 h-16 bg-gradient-to-br from-gray-400 via-gray-50 to-gray-400 rounded-md" />
           </Button>
           <Button
             className="p-1"
-            onClick={() => handleOnThemeChangeClick("dark")}
+            onClick={() => handleOnThemeChangeClick('dark')}
           >
             <div className="w-20 h-16 bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900 rounded-md" />
           </Button>
@@ -151,5 +151,5 @@ function RouteComponent() {
         </div>
       </Drawer>
     </>
-  );
+  )
 }

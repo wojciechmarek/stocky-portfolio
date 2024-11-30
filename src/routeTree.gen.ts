@@ -13,60 +13,91 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as authLayoutImport } from './routes/(auth)/_layout'
 
 // Create Virtual Routes
 
-const StatsLazyImport = createFileRoute('/stats')()
-const ProfileLazyImport = createFileRoute('/profile')()
-const MoreLazyImport = createFileRoute('/more')()
-const LoginLazyImport = createFileRoute('/login')()
-const AssetsLazyImport = createFileRoute('/assets')()
-const AboutLazyImport = createFileRoute('/about')()
+const authImport = createFileRoute('/(auth)')()
 const IndexLazyImport = createFileRoute('/')()
+const ProfileIndexLazyImport = createFileRoute('/profile/')()
+const authRegisterLazyImport = createFileRoute('/(auth)/register')()
+const authLoginLazyImport = createFileRoute('/(auth)/login')()
+const appStatsLazyImport = createFileRoute('/(app)/stats')()
+const appProfileLazyImport = createFileRoute('/(app)/profile')()
+const appAssetsLazyImport = createFileRoute('/(app)/assets')()
+const appAboutLazyImport = createFileRoute('/(app)/about')()
 
 // Create/Update Routes
 
-const StatsLazyRoute = StatsLazyImport.update({
-  id: '/stats',
-  path: '/stats',
+const authRoute = authImport.update({
+  id: '/(auth)',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/stats.lazy').then((d) => d.Route))
-
-const ProfileLazyRoute = ProfileLazyImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/profile.lazy').then((d) => d.Route))
-
-const MoreLazyRoute = MoreLazyImport.update({
-  id: '/more',
-  path: '/more',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/more.lazy').then((d) => d.Route))
-
-const LoginLazyRoute = LoginLazyImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
-
-const AssetsLazyRoute = AssetsLazyImport.update({
-  id: '/assets',
-  path: '/assets',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/assets.lazy').then((d) => d.Route))
-
-const AboutLazyRoute = AboutLazyImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+} as any)
 
 const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const ProfileIndexLazyRoute = ProfileIndexLazyImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/profile/index.lazy').then((d) => d.Route))
+
+const authRegisterLazyRoute = authRegisterLazyImport
+  .update({
+    id: '/register',
+    path: '/register',
+    getParentRoute: () => authRoute,
+  } as any)
+  .lazy(() => import('./routes/(auth)/register.lazy').then((d) => d.Route))
+
+const authLoginLazyRoute = authLoginLazyImport
+  .update({
+    id: '/login',
+    path: '/login',
+    getParentRoute: () => authRoute,
+  } as any)
+  .lazy(() => import('./routes/(auth)/login.lazy').then((d) => d.Route))
+
+const appStatsLazyRoute = appStatsLazyImport
+  .update({
+    id: '/(app)/stats',
+    path: '/stats',
+    getParentRoute: () => rootRoute,
+  } as any)
+  .lazy(() => import('./routes/(app)/stats.lazy').then((d) => d.Route))
+
+const appProfileLazyRoute = appProfileLazyImport
+  .update({
+    id: '/(app)/profile',
+    path: '/profile',
+    getParentRoute: () => rootRoute,
+  } as any)
+  .lazy(() => import('./routes/(app)/profile.lazy').then((d) => d.Route))
+
+const appAssetsLazyRoute = appAssetsLazyImport
+  .update({
+    id: '/(app)/assets',
+    path: '/assets',
+    getParentRoute: () => rootRoute,
+  } as any)
+  .lazy(() => import('./routes/(app)/assets.lazy').then((d) => d.Route))
+
+const appAboutLazyRoute = appAboutLazyImport
+  .update({
+    id: '/(app)/about',
+    path: '/about',
+    getParentRoute: () => rootRoute,
+  } as any)
+  .lazy(() => import('./routes/(app)/about.lazy').then((d) => d.Route))
+
+const authLayoutRoute = authLayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => authRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -79,46 +110,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
+    '/(auth)': {
+      id: '/(auth)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof authImport
+      parentRoute: typeof rootRoute
+    }
+    '/(auth)/_layout': {
+      id: '/(auth)/_layout'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof authLayoutImport
+      parentRoute: typeof authRoute
+    }
+    '/(app)/about': {
+      id: '/(app)/about'
       path: '/about'
       fullPath: '/about'
-      preLoaderRoute: typeof AboutLazyImport
+      preLoaderRoute: typeof appAboutLazyImport
       parentRoute: typeof rootRoute
     }
-    '/assets': {
-      id: '/assets'
+    '/(app)/assets': {
+      id: '/(app)/assets'
       path: '/assets'
       fullPath: '/assets'
-      preLoaderRoute: typeof AssetsLazyImport
+      preLoaderRoute: typeof appAssetsLazyImport
       parentRoute: typeof rootRoute
     }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/more': {
-      id: '/more'
-      path: '/more'
-      fullPath: '/more'
-      preLoaderRoute: typeof MoreLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/profile': {
-      id: '/profile'
+    '/(app)/profile': {
+      id: '/(app)/profile'
       path: '/profile'
       fullPath: '/profile'
-      preLoaderRoute: typeof ProfileLazyImport
+      preLoaderRoute: typeof appProfileLazyImport
       parentRoute: typeof rootRoute
     }
-    '/stats': {
-      id: '/stats'
+    '/(app)/stats': {
+      id: '/(app)/stats'
       path: '/stats'
       fullPath: '/stats'
-      preLoaderRoute: typeof StatsLazyImport
+      preLoaderRoute: typeof appStatsLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/(auth)/login': {
+      id: '/(auth)/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof authLoginLazyImport
+      parentRoute: typeof authImport
+    }
+    '/(auth)/register': {
+      id: '/(auth)/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof authRegisterLazyImport
+      parentRoute: typeof authImport
+    }
+    '/profile/': {
+      id: '/profile/'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileIndexLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -126,35 +178,52 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface authRouteChildren {
+  authLayoutRoute: typeof authLayoutRoute
+  authLoginLazyRoute: typeof authLoginLazyRoute
+  authRegisterLazyRoute: typeof authRegisterLazyRoute
+}
+
+const authRouteChildren: authRouteChildren = {
+  authLayoutRoute: authLayoutRoute,
+  authLoginLazyRoute: authLoginLazyRoute,
+  authRegisterLazyRoute: authRegisterLazyRoute,
+}
+
+const authRouteWithChildren = authRoute._addFileChildren(authRouteChildren)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexLazyRoute
-  '/about': typeof AboutLazyRoute
-  '/assets': typeof AssetsLazyRoute
-  '/login': typeof LoginLazyRoute
-  '/more': typeof MoreLazyRoute
-  '/profile': typeof ProfileLazyRoute
-  '/stats': typeof StatsLazyRoute
+  '/': typeof authLayoutRoute
+  '/about': typeof appAboutLazyRoute
+  '/assets': typeof appAssetsLazyRoute
+  '/profile': typeof ProfileIndexLazyRoute
+  '/stats': typeof appStatsLazyRoute
+  '/login': typeof authLoginLazyRoute
+  '/register': typeof authRegisterLazyRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexLazyRoute
-  '/about': typeof AboutLazyRoute
-  '/assets': typeof AssetsLazyRoute
-  '/login': typeof LoginLazyRoute
-  '/more': typeof MoreLazyRoute
-  '/profile': typeof ProfileLazyRoute
-  '/stats': typeof StatsLazyRoute
+  '/': typeof authLayoutRoute
+  '/about': typeof appAboutLazyRoute
+  '/assets': typeof appAssetsLazyRoute
+  '/profile': typeof ProfileIndexLazyRoute
+  '/stats': typeof appStatsLazyRoute
+  '/login': typeof authLoginLazyRoute
+  '/register': typeof authRegisterLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
-  '/about': typeof AboutLazyRoute
-  '/assets': typeof AssetsLazyRoute
-  '/login': typeof LoginLazyRoute
-  '/more': typeof MoreLazyRoute
-  '/profile': typeof ProfileLazyRoute
-  '/stats': typeof StatsLazyRoute
+  '/(auth)': typeof authRouteWithChildren
+  '/(auth)/_layout': typeof authLayoutRoute
+  '/(app)/about': typeof appAboutLazyRoute
+  '/(app)/assets': typeof appAssetsLazyRoute
+  '/(app)/profile': typeof appProfileLazyRoute
+  '/(app)/stats': typeof appStatsLazyRoute
+  '/(auth)/login': typeof authLoginLazyRoute
+  '/(auth)/register': typeof authRegisterLazyRoute
+  '/profile/': typeof ProfileIndexLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -163,42 +232,52 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/assets'
-    | '/login'
-    | '/more'
     | '/profile'
     | '/stats'
+    | '/login'
+    | '/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/assets' | '/login' | '/more' | '/profile' | '/stats'
-  id:
-    | '__root__'
+  to:
     | '/'
     | '/about'
     | '/assets'
-    | '/login'
-    | '/more'
     | '/profile'
     | '/stats'
+    | '/login'
+    | '/register'
+  id:
+    | '__root__'
+    | '/'
+    | '/(auth)'
+    | '/(auth)/_layout'
+    | '/(app)/about'
+    | '/(app)/assets'
+    | '/(app)/profile'
+    | '/(app)/stats'
+    | '/(auth)/login'
+    | '/(auth)/register'
+    | '/profile/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
-  AboutLazyRoute: typeof AboutLazyRoute
-  AssetsLazyRoute: typeof AssetsLazyRoute
-  LoginLazyRoute: typeof LoginLazyRoute
-  MoreLazyRoute: typeof MoreLazyRoute
-  ProfileLazyRoute: typeof ProfileLazyRoute
-  StatsLazyRoute: typeof StatsLazyRoute
+  authRoute: typeof authRouteWithChildren
+  appAboutLazyRoute: typeof appAboutLazyRoute
+  appAssetsLazyRoute: typeof appAssetsLazyRoute
+  appProfileLazyRoute: typeof appProfileLazyRoute
+  appStatsLazyRoute: typeof appStatsLazyRoute
+  ProfileIndexLazyRoute: typeof ProfileIndexLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
-  AboutLazyRoute: AboutLazyRoute,
-  AssetsLazyRoute: AssetsLazyRoute,
-  LoginLazyRoute: LoginLazyRoute,
-  MoreLazyRoute: MoreLazyRoute,
-  ProfileLazyRoute: ProfileLazyRoute,
-  StatsLazyRoute: StatsLazyRoute,
+  authRoute: authRouteWithChildren,
+  appAboutLazyRoute: appAboutLazyRoute,
+  appAssetsLazyRoute: appAssetsLazyRoute,
+  appProfileLazyRoute: appProfileLazyRoute,
+  appStatsLazyRoute: appStatsLazyRoute,
+  ProfileIndexLazyRoute: ProfileIndexLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -212,34 +291,51 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about",
-        "/assets",
-        "/login",
-        "/more",
-        "/profile",
-        "/stats"
+        "/(auth)",
+        "/(app)/about",
+        "/(app)/assets",
+        "/(app)/profile",
+        "/(app)/stats",
+        "/profile/"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
     },
-    "/about": {
-      "filePath": "about.lazy.tsx"
+    "/(auth)": {
+      "filePath": "(auth)",
+      "children": [
+        "/(auth)/_layout",
+        "/(auth)/login",
+        "/(auth)/register"
+      ]
     },
-    "/assets": {
-      "filePath": "assets.lazy.tsx"
+    "/(auth)/_layout": {
+      "filePath": "(auth)/_layout.tsx",
+      "parent": "/(auth)"
     },
-    "/login": {
-      "filePath": "login.lazy.tsx"
+    "/(app)/about": {
+      "filePath": "(app)/about.lazy.tsx"
     },
-    "/more": {
-      "filePath": "more.lazy.tsx"
+    "/(app)/assets": {
+      "filePath": "(app)/assets.lazy.tsx"
     },
-    "/profile": {
-      "filePath": "profile.lazy.tsx"
+    "/(app)/profile": {
+      "filePath": "(app)/profile.lazy.tsx"
     },
-    "/stats": {
-      "filePath": "stats.lazy.tsx"
+    "/(app)/stats": {
+      "filePath": "(app)/stats.lazy.tsx"
+    },
+    "/(auth)/login": {
+      "filePath": "(auth)/login.lazy.tsx",
+      "parent": "/(auth)"
+    },
+    "/(auth)/register": {
+      "filePath": "(auth)/register.lazy.tsx",
+      "parent": "/(auth)"
+    },
+    "/profile/": {
+      "filePath": "profile/index.lazy.tsx"
     }
   }
 }

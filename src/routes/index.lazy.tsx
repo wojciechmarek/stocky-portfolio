@@ -6,9 +6,11 @@ import {
   Button,
   AccordionHeader,
   AccordionBody,
+  Typography,
 } from "@material-tailwind/react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { ArrowUp } from "lucide-react";
 
 export const Route = createLazyFileRoute("/" as never)({
   component: RouteComponent,
@@ -48,6 +50,23 @@ function RouteComponent() {
 
   return (
     <>
+      <div className="bg-[#242527]">
+        <div className="flex flex-row">
+          <p>Total Net Wor asdth</p>
+          <div className="">
+            <ArrowUp />
+            <p>1.34%</p>
+          </div>
+        </div>
+        <Typography variant="h2">723 123 PLN</Typography>
+        <div className="flex flex-row gap-3">
+          <Button className="bg-[#343434] normal-case rounded-full">Chart</Button>
+          <Button className="bg-[#343434] normal-case rounded-full">Categories</Button>
+          <Button className="bg-[#343434] normal-case rounded-full">Scoring</Button>
+        </div>
+
+      </div>
+
       <div className="grid mt-6 grid-cols-2 gap-2 mx-3">
         {stats.map((stat) => (
           <div

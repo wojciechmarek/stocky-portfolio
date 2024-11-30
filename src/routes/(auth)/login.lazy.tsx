@@ -1,7 +1,7 @@
 import { Button, Input } from "@material-tailwind/react";
 import { createLazyFileRoute } from "@tanstack/react-router";
 
-export const Route = createLazyFileRoute("/login")({
+export const Route = createLazyFileRoute("/(auth)/login")({
   component: RouteComponent,
 });
 
