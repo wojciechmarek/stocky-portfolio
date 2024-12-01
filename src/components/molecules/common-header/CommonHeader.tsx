@@ -34,7 +34,13 @@ export const CommonHeader = () => {
           className="bg-transparent p-2"
           onClick={handleOnProfileButtonClick}
         >
-          <div className="h-8 w-8 bg-red-300 rounded-full"></div>
+          <div className="h-8 w-8 rounded-full">
+            <img
+              src="https://api.dicebear.com/9.x/thumbs/svg?scale=75&seed=Wojtek"
+              alt="profile"
+              className="rounded-full"
+            />
+          </div>
         </Button>
       </div>
     </div>

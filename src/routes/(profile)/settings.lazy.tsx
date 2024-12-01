@@ -1,14 +1,13 @@
 import { Button, Drawer, Typography } from "@material-tailwind/react";
-import { createLazyFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import {
-  ChevronLeft,
-  CreditCard,
-  Languages,
-  LogOut,
-  Moon,
-  X,
-} from "lucide-react";
+import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
+import { CreditCard, Languages, Moon, X } from "lucide-react";
 import { useState } from "react";
+import {
+  CommonBackButton,
+  SettingsUserDetails,
+} from "../../components/molecules";
+import { SettingsSettingButton } from "../../components/molecules/settings-setting-button/SettingsSettingButton";
+import { SettingsButtonsSection } from "../../components/organisms";
 
 export const Route = createLazyFileRoute("/(profile)/settings")({
   component: RouteComponent,
@@ -78,66 +77,24 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-row mx-3 mt-6 items-center justify-between">
-        <Link to={"/overview"}>
-          <Button className="bg-transparent p-3 ">
-            <div className="h-6 w-6">
-              <ChevronLeft />
-            </div>
-          </Button>
-        </Link>
-      </div>
-      <div className="mx-3 mt-6">
-        <div className="flex flex-col justify-evenly items-center">
-          <div className="flex justify-center">
-            <div className="rounded-full h-36 w-36 bg-red-300" />
-          </div>
-          <div className="flex flex-col mx-auto mt-2 ">
-            <h3 className="text-4xl font-bold">Johnantan Doe</h3>
-            <span className="bg-blue-600 rounded-lg px-4">Basic plan</span>
-          </div>
-        </div>
-      </div>
+      <CommonBackButton />
+      <SettingsUserDetails />
+
       <div className="mx-3 flex flex-col mt-12 gap-2">
-        <p className="ml-1 text-dimmed-font-color">Basic</p>
-        {settings.map((setting) => (
-          <Button
-            onClick={handleInSettingButtonClick}
-            className="bg-[#121413] flex flex-row rounded-2xl px-4 py-1 normal-case items-center"
-            key={setting.name}
-          >
-            <div className="">
-              <div
-                className={`w-10 h-10 ${setting.color} rounded-full flex justify-center items-center`}
-              >
-                {setting.icon}
-              </div>
-            </div>
-            <div className="flex flex-col py-2 text-left ml-4">
-              <p className="text-lg">{setting.name}</p>
-              <p className="text-xs text-dimmed-font-color">
-                {setting.description}
-              </p>
-            </div>
-          </Button>
-        ))}
+        <SettingsButtonsSection
+          buttons={settings}
+          name="Overall"
+          handleInSettingButtonClick={handleInSettingButtonClick}
+        />
+
         <p className="ml-1 mt-3 text-dimmed-font-color">Account</p>
-        <Button
-          onClick={handleLogOutButtonClick}
-          className="bg-[#121413] flex flex-row rounded-2xl px-4 py-1 normal-case items-center"
-        >
-          <div className="">
-            <div
-              className={`w-10 h-10 bg-red-500 rounded-full flex justify-center items-center`}
-            >
-              <LogOut />
-            </div>
-          </div>
-          <div className="flex flex-col py-2 text-left ml-4">
-            <p className="text-lg">Logout</p>
-            <p className="text-xs text-dimmed-font-color">End the session</p>
-          </div>
-        </Button>
+        <SettingsSettingButton
+          name="Logout"
+          icon={<X />}
+          color="bg-red-500"
+          description="End the session"
+          handleInSettingButtonClick={handleLogOutButtonClick}
+        />
       </div>
 
       <Drawer
