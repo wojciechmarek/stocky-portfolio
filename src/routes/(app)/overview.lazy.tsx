@@ -7,12 +7,13 @@ import {
   AccordionBody,
   Typography,
 } from "@material-tailwind/react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import {
   CommonHeader,
   MobileBottomNavigation,
 } from "../../components/molecules";
+import { AxisOptions, Chart } from "react-charts";
 
 export const Route = createLazyFileRoute("/overview" as never)({
   component: RouteComponent,
@@ -20,6 +21,67 @@ export const Route = createLazyFileRoute("/overview" as never)({
 
 function RouteComponent() {
   const [open, setOpen] = useState(1);
+
+  const data = [
+    {
+      data: [
+        {
+          primary: new Date("2021-01-01"),
+          secondary: 50,
+        },
+        {
+          primary: new Date("2021-01-02"),
+          secondary: 53,
+        },
+        {
+          primary: new Date("2021-01-03"),
+          secondary: 57,
+        },
+        {
+          primary: new Date("2021-01-04"),
+          secondary: 54,
+        },
+        {
+          primary: new Date("2021-01-05"),
+          secondary: 60,
+        },
+        {
+          primary: new Date("2021-01-06"),
+          secondary: 58,
+        },
+        {
+          primary: new Date("2021-01-07"),
+          secondary: 57,
+        },
+      ],
+    },
+  ];
+
+  const primaryAxis = useMemo<
+    AxisOptions<(typeof data)[number]["data"][number]>
+  >(
+    () => ({
+      getValue: (datum) => datum.primary as Date,
+      showDatumElements: false,
+      show: false,
+    }),
+    []
+  );
+
+  const secondaryAxes = useMemo<
+    AxisOptions<(typeof data)[number]["data"][number]>[]
+  >(
+    () => [
+      {
+        getValue: (datum) => datum.secondary,
+        stacked: true,
+        show: false,
+        // OR
+        // elementType: "area",
+      },
+    ],
+    []
+  );
 
   const stats = [
     {
@@ -114,11 +176,29 @@ function RouteComponent() {
     <div className="flex flex-col h-full">
       <CommonHeader />
       <div className="flex-1 overflow-y-auto">
-        <div className="flex flex-col bg-secondary-bg-color rounded-2xl mx-3 mt-3 p-3">
-          <span className="text-dimmed-font-color">Total net worth</span>
-          <Typography variant="h2" className="mt-1">
-            723 123 PLN
-          </Typography>
+        <div className="flex flex-row bg-secondary-bg-color rounded-2xl mx-3 mt-3 p-3  justify-between">
+          <div className="flex flex-col w-1/2">
+            <span className="text-dimmed-font-color">Total net worth</span>
+            <Typography variant="h3" className="mt-1">
+              123 123 zł
+            </Typography>
+            <div className="flex flex-row gap-2 items-center">
+              <h3 className="inline text-sm text-gray-600">+$1,231</h3>{" "}
+              <span className="text-sm text-green-300 rounded-full bg-green-300 bg-opacity-30 py-0.5 px-2">
+                +2,1%
+              </span>
+            </div>
+          </div>
+          <div className="w-1/2">
+            <Chart
+              className=""
+              options={{
+                data,
+                primaryAxis,
+                secondaryAxes,
+              }}
+            />
+          </div>
         </div>
 
         <div className="grid mt-6 grid-cols-2 gap-2 mx-3">
