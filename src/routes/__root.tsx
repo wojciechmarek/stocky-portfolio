@@ -1,6 +1,5 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { Flip, ToastContainer } from "react-toastify";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
 export const Route = createRootRoute({
   component: () => (
@@ -9,7 +8,6 @@ export const Route = createRootRoute({
       <main className="h-screen bg-primary-bg-color text-primary-font-color">
         <Outlet />
       </main>
-      <TanStackRouterDevtools />
     </>
   ),
 });
