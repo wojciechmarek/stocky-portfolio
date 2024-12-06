@@ -16,12 +16,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --primary-bg-color: #020202;
-  --secondary-bg-color: #121413;
+  --primary-bg-color: #111427;
+  --secondary-bg-color: #151d34;
 
   --primary-font-color: #ffffffde;
   --contrast-font-color: #ffffffde;
-  --dimmed-font-color: #757575;
+  --dimmed-font-color: #5d6177;
 }
 
 [data-theme="light"] {

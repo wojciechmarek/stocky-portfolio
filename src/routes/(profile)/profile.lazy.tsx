@@ -2,14 +2,11 @@ import { Button, Drawer, Typography } from "@material-tailwind/react";
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
 import { CreditCard, Languages, Moon, X } from "lucide-react";
 import { useState } from "react";
-import {
-  CommonBackButton,
-  SettingsUserDetails,
-} from "../../components/molecules";
+import { SettingsUserDetails, TitledHeader } from "../../components/molecules";
 import { SettingsSettingButton } from "../../components/molecules/settings-setting-button/SettingsSettingButton";
 import { SettingsButtonsSection } from "../../components/organisms";
 
-export const Route = createLazyFileRoute("/(profile)/settings")({
+export const Route = createLazyFileRoute("/(profile)/profile")({
   component: RouteComponent,
 });
 
@@ -19,7 +16,7 @@ function RouteComponent() {
   const settings = [
     {
       icon: <Moon />,
-      color: "bg-gray-700",
+      color: "bg-[#020202]",
       name: "Theme",
       description: "Change the app theme",
     },
@@ -76,11 +73,11 @@ function RouteComponent() {
   };
 
   return (
-    <div className="flex flex-col">
-      <CommonBackButton />
+    <div className="flex flex-col h-full">
+      <TitledHeader title="Profile" />
       <SettingsUserDetails />
 
-      <div className="mx-3 flex flex-col mt-12 gap-2">
+      <div className="mx-3 flex flex-col mt-6 gap-2">
         <SettingsButtonsSection
           buttons={settings}
           name="Overall"
@@ -102,11 +99,13 @@ function RouteComponent() {
         size={550}
         open={openBottom}
         onClose={closeDrawerBottom}
-        className="p-4 bg-[#121413] rounded-tl-3xl rounded-tr-3xl"
+        className="p-4 bg-secondary-bg-color rounded-tl-3xl rounded-tr-3xl"
       >
-        <div className="mb-4 flex items-center justify-between ">
+        <div className="mb-4 flex items-center justify-between">
           <Typography variant="h3">Theme</Typography>
-          <X onClick={closeDrawerBottom} />
+          <Button className="bg-transparent p-2" onClick={closeDrawerBottom}>
+            <X />
+          </Button>
         </div>
         <Typography className="mb-2 pr-4 font-normal">
           Select a default theme

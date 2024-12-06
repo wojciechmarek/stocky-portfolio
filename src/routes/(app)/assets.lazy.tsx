@@ -7,6 +7,7 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
+import { TitledHeader } from "../../components/molecules";
 
 export const Route = createLazyFileRoute("/assets" as never)({
   component: RouteComponent,
@@ -42,16 +43,17 @@ function RouteComponent() {
     },
   ];
   return (
-    <>
+    <div className="flex flex-col h-full">
+      <TitledHeader title="Assets" />
       <Tabs>
         <TabsHeader
-          className="bg-[#1b1e1c] mt-6 mx-3"
+          className="bg-secondary-bg-color mt-6 mx-3"
           indicatorProps={{
             className: "bg-[#1e201f]",
           }}
         >
           {data.map(({ label, value }) => (
-            <Tab key={value} value={value} className="text-inherit bg-red ">
+            <Tab key={value} value={value} className="text-primary-font-color ">
               {label}
             </Tab>
           ))}
@@ -64,6 +66,6 @@ function RouteComponent() {
           ))}
         </TabsBody>
       </Tabs>
-    </>
+    </div>
   );
 }

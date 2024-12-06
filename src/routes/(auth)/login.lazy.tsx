@@ -15,18 +15,20 @@ function RouteComponent() {
   return (
     <div className="flex h-full justify-center items-center px-3 flex-col">
       <div className="flex flex-col bg-secondary-bg-color w-11/12 p-6 rounded-2xl">
-        <form className="flex flex-col gap-y-2">
-          <h2 className="text-3xl font-bold mb-3">Sign in</h2>
+        <h2 className="text-3xl font-bold">Sign in</h2>
+        <form className="flex flex-col gap-y-2 mt-6">
           <Input label="Email" color="white" />
           <Input label="Password" color="white" />
           <Link to="/register" className="text-xs ml-1 underline text-blue-500">
             Forget password?
           </Link>
-          <Button className="mt-3">Log-in</Button>
+          <Button className="mt-3 normal-case bg-primary-bg-color">
+            Log-in
+          </Button>
         </form>
-        <span className="text-center my-2">or</span>
+        <span className="text-center my-3">or</span>
         <Button
-          className="flex items-center justify-center gap-3"
+          className="flex items-center justify-center gap-3 normal-case bg-primary-bg-color"
           onClick={handleOnGoogleLoginClick}
         >
           <img

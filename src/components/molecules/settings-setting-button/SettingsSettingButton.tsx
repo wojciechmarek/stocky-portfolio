@@ -15,7 +15,7 @@ export const SettingsSettingButton = (props: SettingsSettingButtonProps) => {
   return (
     <Button
       onClick={handleInSettingButtonClick}
-      className="bg-[#121413] flex flex-row rounded-2xl px-4 py-1 normal-case items-center"
+      className="bg-secondary-bg-color flex flex-row rounded-2xl px-4 py-1 normal-case items-center"
       key={name}
     >
       <div className="">
