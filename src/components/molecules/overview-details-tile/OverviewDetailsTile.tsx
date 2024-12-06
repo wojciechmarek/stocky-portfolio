@@ -1,4 +1,4 @@
-import Chart from "react-apexcharts";
+import Chart, { Props } from "react-apexcharts";
 
 export type OverviewDetailsTileProps = {
   name: string;
@@ -10,8 +10,8 @@ export type OverviewDetailsTileProps = {
 export const OverviewDetailsTile = (props: OverviewDetailsTileProps) => {
   const { name, change, chartColor, value } = props;
 
-  const chartConfig = {
-    type: "line",
+  const chartConfig: Props = {
+    type: "line" as never,
     height: 80,
     series: [
       {
@@ -26,7 +26,7 @@ export const OverviewDetailsTile = (props: OverviewDetailsTileProps) => {
         },
       },
       title: {
-        show: "",
+        // show: ,
       },
       dataLabels: {
         // enabled: false,
@@ -34,8 +34,8 @@ export const OverviewDetailsTile = (props: OverviewDetailsTileProps) => {
       },
       colors: [chartColor],
       stroke: {
-        lineCap: "round",
-        curve: "smooth",
+        lineCap: "round" as never,
+        curve: "smooth" as never,
       },
       markers: {
         size: 0,
