@@ -1,7 +1,4 @@
-export * from "./headers";
-
-export * from "./mobile-navbar/MobileNavbar";
-export * from './settings-user-details/SettingsUserDetails';
-export * from './settings-setting-button/SettingsSettingButton';
-export * from './overview-details-tile/OverviewDetailsTile';
-
+export * from "./header";
+export * from "./overview";
+export * from "./navigation";
+export * from "./profile";

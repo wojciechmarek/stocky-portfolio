@@ -1,13 +1,11 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import {
-  MobileNavbar,
-  OverviewDetailsTile,
-  OverviewHeader,
-} from "../../components/molecules";
-import { OverviewJumbotronSection } from "../../components/organisms";
+import { QuickStatisticTile } from "../../components/molecules";
 import { useState } from "react";
 import { Button, Drawer, Typography } from "@material-tailwind/react";
 import { X } from "lucide-react";
+import { OverviewHeader } from "../../components/organisms/headers/overview-header/OverviewHeader";
+import { SummaryJumbotron } from "../../components/organisms/overview/summary-jumbotron/SummaryJumbotron";
+import { MobileNavigationBar } from "../../components/organisms/navigation";
 
 export const Route = createLazyFileRoute("/overview" as never)({
   component: RouteComponent,
@@ -43,19 +41,24 @@ function RouteComponent() {
       change: "-$0.23%",
       chartColor: "#09090b",
     },
+    {
+      name: "Drawndown",
+      value: "9.34%",
+      change: "-$0.23%",
+      chartColor: "#09090b",
+    },
   ];
   return (
-    <div className="flex flex-col h-full">
-      <OverviewHeader onPortfolioButtonClick={openDrawerBottom} />
-      <div className="flex-1 overflow-y-auto">
-        <div className="mt-3">
-          <OverviewJumbotronSection />
-        </div>
-
-        <div className="grid mt-6 mb-3 grid-cols-2 gap-2 mx-3">
-          {details.map((detail) => (
-            <OverviewDetailsTile {...detail} />
-          ))}
+    <>
+      <div className="flex flex-col h-full">
+        <OverviewHeader onSelectorButtonClick={openDrawerBottom} />
+        <div className="overflow-y-auto flex-grow">
+          <SummaryJumbotron className="mt-3" />
+          <div className="grid mt-6 mb-3 grid-cols-2 gap-2 mx-3">
+            {details.map((detail) => (
+              <QuickStatisticTile {...detail} />
+            ))}
+          </div>
         </div>
 
         {/* <Accordion open={open === 1} className="px-3">
@@ -111,8 +114,8 @@ function RouteComponent() {
         >
           Notify!
         </Button> */}
+        <MobileNavigationBar />
       </div>
-      <MobileNavbar />
 
       <Drawer
         placement="bottom"
@@ -139,7 +142,7 @@ function RouteComponent() {
           ))}
         </div>
       </Drawer>
-    </div>
+    </>
   );
 }
 

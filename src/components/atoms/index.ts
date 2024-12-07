@@ -1,3 +1,2 @@
-export * from './mobile-navbar-link/MobileNavbarLink';
-export * from './header-account-buttons/HeaderAccountButtons';
-export * from './overview-summary-button/OverviewSummaryButton';
+export * from "./buttons";
+export * from "./titles";

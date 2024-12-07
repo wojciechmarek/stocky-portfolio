@@ -17,6 +17,20 @@ export default withMT({
     fontFamily: {
       sans: ["Gabarito", "sans-serif"],
     },
+    buttons: {
+      variants: {
+        filled: {
+          transparent: {
+            background: "bg-transparent",
+            color: "var(--primary-font-color)",
+            shadow: "shadow-md shadow-red-500/20",
+            hover: "hover:shadow-lg hover:shadow-red-500/40",
+            focus: "focus:opacity-[0.85] focus:shadow-none",
+            active: "active:opacity-[0.85] active:shadow-none",
+          },
+        },
+      },
+    },
   },
   plugins: [],
 });

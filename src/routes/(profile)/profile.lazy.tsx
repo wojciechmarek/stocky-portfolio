@@ -1,12 +1,12 @@
 import { Button, Drawer, Typography } from "@material-tailwind/react";
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
-import { CreditCard, Languages, Moon, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { SettingsUserDetails, TitledHeader } from "../../components/molecules";
-import { SettingsSettingButton } from "../../components/molecules/settings-setting-button/SettingsSettingButton";
-import { SettingsButtonsSection } from "../../components/organisms";
 import { useApi } from "../../api";
 import { Models } from "appwrite";
+import { StandardHeader } from "../../components/organisms/headers";
+import { UserJumbotron } from "../../components/organisms/profile";
+import { SettingsButtonsSection } from "../../components/molecules/profile";
 
 export const Route = createLazyFileRoute("/(profile)/profile")({
   component: RouteComponent,
@@ -14,30 +14,11 @@ export const Route = createLazyFileRoute("/(profile)/profile")({
 
 function RouteComponent() {
   const navigate = useNavigate();
-  const { account } = useApi();
+  const { account, avatars } = useApi();
+
+  const initialsUrl = avatars.getInitials("Wo Ma");
 
   const [user, setUser] = useState<Models.User<Models.Preferences>>();
-
-  const settings = [
-    {
-      icon: <Moon />,
-      color: "bg-[#020202]",
-      name: "Theme",
-      description: "Change the app theme",
-    },
-    {
-      icon: <CreditCard />,
-      color: "bg-green-500",
-      name: "Subscription",
-      description: "Change the app theme",
-    },
-    {
-      icon: <Languages />,
-      color: "bg-blue-500",
-      name: "Language",
-      description: "Change the app theme",
-    },
-  ];
 
   const colors = [
     "bg-[#5743f4]",
@@ -89,25 +70,22 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col h-full">
-      <TitledHeader title="Profile" />
-      <SettingsUserDetails email={user?.email} />
+      <StandardHeader title="Profile" />
+      <UserJumbotron
+        userDetails={{
+          email: user?.email,
+          profileUrl: initialsUrl,
+        }}
+      />
 
       <div className="mx-3 flex flex-col mt-6 gap-2">
         <SettingsButtonsSection
-          buttons={settings}
-          name="Overall"
+          title="Overall"
           handleInSettingButtonClick={handleInSettingButtonClick}
         />
-
-        <p className="ml-1 mt-3 text-dimmed-font-color">Account</p>
-        <SettingsSettingButton
-          name="Logout"
-          icon={<X />}
-          color="bg-red-500"
-          description="End the session"
-          handleInSettingButtonClick={handleLogOutButtonClick}
-        />
       </div>
+
+      <Button onClick={handleLogOutButtonClick}>Log Out</Button>
 
       <Drawer
         placement="bottom"
@@ -117,7 +95,7 @@ function RouteComponent() {
         className="p-4 bg-secondary-bg-color rounded-tl-3xl rounded-tr-3xl"
       >
         <div className="mb-4 flex items-center justify-between">
-          <Typography variant="h3">Theme</Typography>
+          <Typography variant="h3">Appearance</Typography>
           <Button className="bg-transparent p-2" onClick={closeDrawerBottom}>
             <X />
           </Button>

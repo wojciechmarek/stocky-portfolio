@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { TitledHeader } from "../../components/molecules";
+import { StandardHeader } from "../../components/organisms";
 
 export const Route = createLazyFileRoute("/transactions" as never)({
   component: RouteComponent,
@@ -8,7 +8,7 @@ export const Route = createLazyFileRoute("/transactions" as never)({
 function RouteComponent() {
   return (
     <div className="flex flex-col h-full">
-      <TitledHeader title="Transactions" />
+      <StandardHeader title="Transactions" />
       Hello from Transactions!
     </div>
   );

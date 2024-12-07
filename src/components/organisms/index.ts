@@ -1,2 +1,4 @@
-export * from './settings-buttons-section/SettingsButtonsSection';
-export * from './overview-jumbotron-section/OverviewJumbotronSection';
+export * from "./headers";
+export * from "./navigation";
+export * from "./overview";
+export * from "./profile";

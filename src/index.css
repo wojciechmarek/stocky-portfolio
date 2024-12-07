@@ -25,6 +25,10 @@
 }
 
 [data-theme="light"] {
-  --background-color: #ffffff;
-  --font-color: #252529;
+  --primary-bg-color: #ffffff;
+  --secondary-bg-color: #f0f4f9;
+
+  --primary-font-color: #000000de;
+  --contrast-font-color: #000000de;
+  --dimmed-font-color: #9fa5c8;
 }

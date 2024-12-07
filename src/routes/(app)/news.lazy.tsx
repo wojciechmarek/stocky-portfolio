@@ -1,5 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
-import { TitledHeader } from "../../components/molecules";
+import { StandardHeader } from "../../components/organisms/headers";
+import { MobileNavigationBar } from "../../components/organisms";
 
 export const Route = createLazyFileRoute("/news" as never)({
   component: RouteComponent,
@@ -8,8 +9,9 @@ export const Route = createLazyFileRoute("/news" as never)({
 function RouteComponent() {
   return (
     <div className="flex flex-col h-full">
-      <TitledHeader title="News" />
-      Hello from News!
+      <StandardHeader title="News" isBackButtonVisible={false} />
+      <div className="flex-grow">Hello from News!</div>
+      <MobileNavigationBar />
     </div>
   );
 }
