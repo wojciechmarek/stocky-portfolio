@@ -17,6 +17,7 @@ export const SettingsButtonsSection = (props: SettingsButtonsSectionProps) => {
       <p className="ml-1 text-dimmed-font-color">{name}</p>
       {buttons.map((button) => (
         <SettingsSettingButton
+          key={button.name}
           {...button}
           handleInSettingButtonClick={() => handleInSettingButtonClick(button)}
         />

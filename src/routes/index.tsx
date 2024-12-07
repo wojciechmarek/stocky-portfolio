@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useApi } from "../api";
 
 export const Route = createFileRoute("/" as never)({
   component: RouteComponent,
@@ -6,8 +7,13 @@ export const Route = createFileRoute("/" as never)({
 
 function RouteComponent() {
   const navigate = useNavigate();
+  const { account } = useApi();
 
-  navigate({ to: "/overview" });
+  if (account) {
+    navigate({ to: "/overview" });
+  }
+
+  navigate({ to: "/login" });
 
   return null;
 }

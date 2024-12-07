@@ -6,6 +6,8 @@ import { createRouter, RouterProvider } from "@tanstack/react-router";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
+import { ApiContext } from "./api/api.context";
+import { account } from "./api/api.provider";
 const router = createRouter({ routeTree });
 
 // Register the router instance for type safety
@@ -18,7 +20,9 @@ declare module "@tanstack/react-router" {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <ApiContext.Provider value={{ account }}>
+        <RouterProvider router={router} />
+      </ApiContext.Provider>
     </ThemeProvider>
   </StrictMode>
 );

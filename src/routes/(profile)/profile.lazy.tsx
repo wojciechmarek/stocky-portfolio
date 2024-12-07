@@ -1,10 +1,12 @@
 import { Button, Drawer, Typography } from "@material-tailwind/react";
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router";
 import { CreditCard, Languages, Moon, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SettingsUserDetails, TitledHeader } from "../../components/molecules";
 import { SettingsSettingButton } from "../../components/molecules/settings-setting-button/SettingsSettingButton";
 import { SettingsButtonsSection } from "../../components/organisms";
+import { useApi } from "../../api";
+import { Models } from "appwrite";
 
 export const Route = createLazyFileRoute("/(profile)/profile")({
   component: RouteComponent,
@@ -12,6 +14,9 @@ export const Route = createLazyFileRoute("/(profile)/profile")({
 
 function RouteComponent() {
   const navigate = useNavigate();
+  const { account } = useApi();
+
+  const [user, setUser] = useState<Models.User<Models.Preferences>>();
 
   const settings = [
     {
@@ -57,7 +62,8 @@ function RouteComponent() {
     openDrawerBottom();
   };
 
-  const handleLogOutButtonClick = () => {
+  const handleLogOutButtonClick = async () => {
+    await account.deleteSession("current");
     navigate({ to: "/login" });
   };
 
@@ -72,10 +78,19 @@ function RouteComponent() {
     }
   };
 
+  useEffect(() => {
+    const getAccount = async () => {
+      const data = await account.get();
+      setUser(data);
+    };
+
+    getAccount();
+  }, [account]);
+
   return (
     <div className="flex flex-col h-full">
       <TitledHeader title="Profile" />
-      <SettingsUserDetails />
+      <SettingsUserDetails email={user?.email} />
 
       <div className="mx-3 flex flex-col mt-6 gap-2">
         <SettingsButtonsSection
