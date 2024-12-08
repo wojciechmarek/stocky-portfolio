@@ -36,7 +36,7 @@ export const OverviewHeader = (props: OverviewHeaderProps) => {
     }
   };
   return (
-    <div className="flex flex-row mx-3 mt-6 mb-3 items-center justify-between">
+    <div className="flex flex-row mx-3 mt-6 mb-3 items-center justify-between sticky top-0">
       <OverviewSelectorTitle value="Overview" onClick={onSelectorButtonClick} />
       <AccountManagementButtons
         onClick={handleAccountManagementButtonClick}

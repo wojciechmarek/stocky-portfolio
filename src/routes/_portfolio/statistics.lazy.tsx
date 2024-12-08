@@ -1,6 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 
-export const Route = createLazyFileRoute("/stats" as never)({
+export const Route = createLazyFileRoute("/statistics" as never)({
   component: RouteComponent,
 });
 

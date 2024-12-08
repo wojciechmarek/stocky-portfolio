@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useApi } from "../../api";
 import { OAuthProvider } from "appwrite";
 
-export const Route = createLazyFileRoute("/(auth)/login")({
+export const Route = createLazyFileRoute("/_auth/login")({
   component: RouteComponent,
 });
 
@@ -31,11 +31,28 @@ function RouteComponent() {
   };
 
   const handleOnGoogleLoginClick = async () => {
-    await account.createOAuth2Session(
+    const result = await account.createOAuth2Session(
+      OAuthProvider.Google,
+      "http://localhost:5173/profile",
+      "http://localhost:5173/register"
+    );
+
+    if (result) {
+      navigate({ to: "/profile" });
+    }
+  };
+
+  const handleOnGithubLoginClick = async () => {
+    const result = await account.createOAuth2Session(
       OAuthProvider.Github,
       "http://localhost:5173/profile",
-      "http://localhost:5173/profile"
+      "http://localhost:5173/register"
     );
+    console.log("------->", result);
+
+    if (result) {
+      navigate({ to: "/profile" });
+    }
   };
 
   return (
@@ -67,12 +84,24 @@ function RouteComponent() {
           </Button>
         </form>
         <span className="text-center my-3">or</span>
+        <div className="flex flex-row gap-2"></div>
         <Button
           className="flex items-center justify-center gap-3 normal-case bg-primary-bg-color"
           onClick={handleOnGoogleLoginClick}
         >
           <img
-            src="https://docs.material-tailwind.com/icons/github.svg"
+            src="https://docs.material-tailwind.com/icons/google.svg"
+            alt="metamask"
+            className="h-6 w-6"
+          />
+          <span>Continue with Google</span>
+        </Button>
+        <Button
+          className="flex items-center justify-center gap-3 normal-case bg-primary-bg-color mt-2"
+          onClick={handleOnGithubLoginClick}
+        >
+          <img
+            src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_960_720.png"
             alt="metamask"
             className="h-6 w-6"
           />

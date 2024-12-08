@@ -7,5 +7,9 @@ export type DrawerTitleProps = {
 export const DrawerTitle = (props: DrawerTitleProps) => {
   const { value } = props;
 
-  return <Typography variant="h2">{value}</Typography>;
+  return (
+    <Typography variant="h2" className="text-2xl font-bold">
+      {value}
+    </Typography>
+  );
 };

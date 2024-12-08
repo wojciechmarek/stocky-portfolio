@@ -13,383 +13,462 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
+import { Route as ProfileImport } from './routes/_profile'
+import { Route as PortfolioImport } from './routes/_portfolio'
+import { Route as AuthImport } from './routes/_auth'
+import { Route as AppImport } from './routes/_app'
 
 // Create Virtual Routes
 
-const profileProfileLazyImport = createFileRoute('/(profile)/profile')()
-const profileNotificationsLazyImport = createFileRoute(
-  '/(profile)/notifications',
+const ProfileSearchLazyImport = createFileRoute('/_profile/search')()
+const ProfileProfileLazyImport = createFileRoute('/_profile/profile')()
+const ProfileNotificationsLazyImport = createFileRoute(
+  '/_profile/notifications',
 )()
-const authRegisterLazyImport = createFileRoute('/(auth)/register')()
-const authLoginLazyImport = createFileRoute('/(auth)/login')()
-const appTransactionsLazyImport = createFileRoute('/(app)/transactions')()
-const appStatsLazyImport = createFileRoute('/(app)/stats')()
-const appSearchLazyImport = createFileRoute('/(app)/search')()
-const appOverviewLazyImport = createFileRoute('/(app)/overview')()
-const appNewsLazyImport = createFileRoute('/(app)/news')()
-const appMoreLazyImport = createFileRoute('/(app)/more')()
-const appMarketsLazyImport = createFileRoute('/(app)/markets')()
-const appDetailsLazyImport = createFileRoute('/(app)/details')()
-const appAssetsLazyImport = createFileRoute('/(app)/assets')()
+const PortfolioTransactionsLazyImport = createFileRoute(
+  '/_portfolio/transactions',
+)()
+const PortfolioStatisticsLazyImport = createFileRoute(
+  '/_portfolio/statistics',
+)()
+const PortfolioOverviewLazyImport = createFileRoute('/_portfolio/overview')()
+const PortfolioDetailsLazyImport = createFileRoute('/_portfolio/details')()
+const PortfolioAssetsLazyImport = createFileRoute('/_portfolio/assets')()
+const AuthRegisterLazyImport = createFileRoute('/_auth/register')()
+const AuthLoginLazyImport = createFileRoute('/_auth/login')()
+const AppNewsLazyImport = createFileRoute('/_app/news')()
+const AppMoreLazyImport = createFileRoute('/_app/more')()
+const AppMarketsLazyImport = createFileRoute('/_app/markets')()
 
 // Create/Update Routes
 
-const IndexRoute = IndexImport.update({
-  id: '/',
-  path: '/',
+const ProfileRoute = ProfileImport.update({
+  id: '/_profile',
   getParentRoute: () => rootRoute,
 } as any)
 
-const profileProfileLazyRoute = profileProfileLazyImport
-  .update({
-    id: '/(profile)/profile',
-    path: '/profile',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(profile)/profile.lazy').then((d) => d.Route))
+const PortfolioRoute = PortfolioImport.update({
+  id: '/_portfolio',
+  getParentRoute: () => rootRoute,
+} as any)
 
-const profileNotificationsLazyRoute = profileNotificationsLazyImport
-  .update({
-    id: '/(profile)/notifications',
-    path: '/notifications',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() =>
-    import('./routes/(profile)/notifications.lazy').then((d) => d.Route),
-  )
+const AuthRoute = AuthImport.update({
+  id: '/_auth',
+  getParentRoute: () => rootRoute,
+} as any)
 
-const authRegisterLazyRoute = authRegisterLazyImport
-  .update({
-    id: '/(auth)/register',
-    path: '/register',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(auth)/register.lazy').then((d) => d.Route))
+const AppRoute = AppImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRoute,
+} as any)
 
-const authLoginLazyRoute = authLoginLazyImport
-  .update({
-    id: '/(auth)/login',
-    path: '/login',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(auth)/login.lazy').then((d) => d.Route))
+const ProfileSearchLazyRoute = ProfileSearchLazyImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => ProfileRoute,
+} as any).lazy(() =>
+  import('./routes/_profile/search.lazy').then((d) => d.Route),
+)
 
-const appTransactionsLazyRoute = appTransactionsLazyImport
-  .update({
-    id: '/(app)/transactions',
-    path: '/transactions',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(app)/transactions.lazy').then((d) => d.Route))
+const ProfileProfileLazyRoute = ProfileProfileLazyImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => ProfileRoute,
+} as any).lazy(() =>
+  import('./routes/_profile/profile.lazy').then((d) => d.Route),
+)
 
-const appStatsLazyRoute = appStatsLazyImport
-  .update({
-    id: '/(app)/stats',
-    path: '/stats',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(app)/stats.lazy').then((d) => d.Route))
+const ProfileNotificationsLazyRoute = ProfileNotificationsLazyImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => ProfileRoute,
+} as any).lazy(() =>
+  import('./routes/_profile/notifications.lazy').then((d) => d.Route),
+)
 
-const appSearchLazyRoute = appSearchLazyImport
-  .update({
-    id: '/(app)/search',
-    path: '/search',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(app)/search.lazy').then((d) => d.Route))
+const PortfolioTransactionsLazyRoute = PortfolioTransactionsLazyImport.update({
+  id: '/transactions',
+  path: '/transactions',
+  getParentRoute: () => PortfolioRoute,
+} as any).lazy(() =>
+  import('./routes/_portfolio/transactions.lazy').then((d) => d.Route),
+)
 
-const appOverviewLazyRoute = appOverviewLazyImport
-  .update({
-    id: '/(app)/overview',
-    path: '/overview',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(app)/overview.lazy').then((d) => d.Route))
+const PortfolioStatisticsLazyRoute = PortfolioStatisticsLazyImport.update({
+  id: '/statistics',
+  path: '/statistics',
+  getParentRoute: () => PortfolioRoute,
+} as any).lazy(() =>
+  import('./routes/_portfolio/statistics.lazy').then((d) => d.Route),
+)
 
-const appNewsLazyRoute = appNewsLazyImport
-  .update({
-    id: '/(app)/news',
-    path: '/news',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(app)/news.lazy').then((d) => d.Route))
+const PortfolioOverviewLazyRoute = PortfolioOverviewLazyImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => PortfolioRoute,
+} as any).lazy(() =>
+  import('./routes/_portfolio/overview.lazy').then((d) => d.Route),
+)
 
-const appMoreLazyRoute = appMoreLazyImport
-  .update({
-    id: '/(app)/more',
-    path: '/more',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(app)/more.lazy').then((d) => d.Route))
+const PortfolioDetailsLazyRoute = PortfolioDetailsLazyImport.update({
+  id: '/details',
+  path: '/details',
+  getParentRoute: () => PortfolioRoute,
+} as any).lazy(() =>
+  import('./routes/_portfolio/details.lazy').then((d) => d.Route),
+)
 
-const appMarketsLazyRoute = appMarketsLazyImport
-  .update({
-    id: '/(app)/markets',
-    path: '/markets',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(app)/markets.lazy').then((d) => d.Route))
+const PortfolioAssetsLazyRoute = PortfolioAssetsLazyImport.update({
+  id: '/assets',
+  path: '/assets',
+  getParentRoute: () => PortfolioRoute,
+} as any).lazy(() =>
+  import('./routes/_portfolio/assets.lazy').then((d) => d.Route),
+)
 
-const appDetailsLazyRoute = appDetailsLazyImport
-  .update({
-    id: '/(app)/details',
-    path: '/details',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(app)/details.lazy').then((d) => d.Route))
+const AuthRegisterLazyRoute = AuthRegisterLazyImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => AuthRoute,
+} as any).lazy(() =>
+  import('./routes/_auth/register.lazy').then((d) => d.Route),
+)
 
-const appAssetsLazyRoute = appAssetsLazyImport
-  .update({
-    id: '/(app)/assets',
-    path: '/assets',
-    getParentRoute: () => rootRoute,
-  } as any)
-  .lazy(() => import('./routes/(app)/assets.lazy').then((d) => d.Route))
+const AuthLoginLazyRoute = AuthLoginLazyImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AuthRoute,
+} as any).lazy(() => import('./routes/_auth/login.lazy').then((d) => d.Route))
+
+const AppNewsLazyRoute = AppNewsLazyImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => AppRoute,
+} as any).lazy(() => import('./routes/_app/news.lazy').then((d) => d.Route))
+
+const AppMoreLazyRoute = AppMoreLazyImport.update({
+  id: '/more',
+  path: '/more',
+  getParentRoute: () => AppRoute,
+} as any).lazy(() => import('./routes/_app/more.lazy').then((d) => d.Route))
+
+const AppMarketsLazyRoute = AppMarketsLazyImport.update({
+  id: '/markets',
+  path: '/markets',
+  getParentRoute: () => AppRoute,
+} as any).lazy(() => import('./routes/_app/markets.lazy').then((d) => d.Route))
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppImport
       parentRoute: typeof rootRoute
     }
-    '/(app)/assets': {
-      id: '/(app)/assets'
-      path: '/assets'
-      fullPath: '/assets'
-      preLoaderRoute: typeof appAssetsLazyImport
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
-    '/(app)/details': {
-      id: '/(app)/details'
-      path: '/details'
-      fullPath: '/details'
-      preLoaderRoute: typeof appDetailsLazyImport
+    '/_portfolio': {
+      id: '/_portfolio'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof PortfolioImport
       parentRoute: typeof rootRoute
     }
-    '/(app)/markets': {
-      id: '/(app)/markets'
+    '/_profile': {
+      id: '/_profile'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof ProfileImport
+      parentRoute: typeof rootRoute
+    }
+    '/_app/markets': {
+      id: '/_app/markets'
       path: '/markets'
       fullPath: '/markets'
-      preLoaderRoute: typeof appMarketsLazyImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AppMarketsLazyImport
+      parentRoute: typeof AppImport
     }
-    '/(app)/more': {
-      id: '/(app)/more'
+    '/_app/more': {
+      id: '/_app/more'
       path: '/more'
       fullPath: '/more'
-      preLoaderRoute: typeof appMoreLazyImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AppMoreLazyImport
+      parentRoute: typeof AppImport
     }
-    '/(app)/news': {
-      id: '/(app)/news'
+    '/_app/news': {
+      id: '/_app/news'
       path: '/news'
       fullPath: '/news'
-      preLoaderRoute: typeof appNewsLazyImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AppNewsLazyImport
+      parentRoute: typeof AppImport
     }
-    '/(app)/overview': {
-      id: '/(app)/overview'
-      path: '/overview'
-      fullPath: '/overview'
-      preLoaderRoute: typeof appOverviewLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(app)/search': {
-      id: '/(app)/search'
-      path: '/search'
-      fullPath: '/search'
-      preLoaderRoute: typeof appSearchLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(app)/stats': {
-      id: '/(app)/stats'
-      path: '/stats'
-      fullPath: '/stats'
-      preLoaderRoute: typeof appStatsLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(app)/transactions': {
-      id: '/(app)/transactions'
-      path: '/transactions'
-      fullPath: '/transactions'
-      preLoaderRoute: typeof appTransactionsLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/login': {
-      id: '/(auth)/login'
+    '/_auth/login': {
+      id: '/_auth/login'
       path: '/login'
       fullPath: '/login'
-      preLoaderRoute: typeof authLoginLazyImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AuthLoginLazyImport
+      parentRoute: typeof AuthImport
     }
-    '/(auth)/register': {
-      id: '/(auth)/register'
+    '/_auth/register': {
+      id: '/_auth/register'
       path: '/register'
       fullPath: '/register'
-      preLoaderRoute: typeof authRegisterLazyImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AuthRegisterLazyImport
+      parentRoute: typeof AuthImport
     }
-    '/(profile)/notifications': {
-      id: '/(profile)/notifications'
+    '/_portfolio/assets': {
+      id: '/_portfolio/assets'
+      path: '/assets'
+      fullPath: '/assets'
+      preLoaderRoute: typeof PortfolioAssetsLazyImport
+      parentRoute: typeof PortfolioImport
+    }
+    '/_portfolio/details': {
+      id: '/_portfolio/details'
+      path: '/details'
+      fullPath: '/details'
+      preLoaderRoute: typeof PortfolioDetailsLazyImport
+      parentRoute: typeof PortfolioImport
+    }
+    '/_portfolio/overview': {
+      id: '/_portfolio/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof PortfolioOverviewLazyImport
+      parentRoute: typeof PortfolioImport
+    }
+    '/_portfolio/statistics': {
+      id: '/_portfolio/statistics'
+      path: '/statistics'
+      fullPath: '/statistics'
+      preLoaderRoute: typeof PortfolioStatisticsLazyImport
+      parentRoute: typeof PortfolioImport
+    }
+    '/_portfolio/transactions': {
+      id: '/_portfolio/transactions'
+      path: '/transactions'
+      fullPath: '/transactions'
+      preLoaderRoute: typeof PortfolioTransactionsLazyImport
+      parentRoute: typeof PortfolioImport
+    }
+    '/_profile/notifications': {
+      id: '/_profile/notifications'
       path: '/notifications'
       fullPath: '/notifications'
-      preLoaderRoute: typeof profileNotificationsLazyImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof ProfileNotificationsLazyImport
+      parentRoute: typeof ProfileImport
     }
-    '/(profile)/profile': {
-      id: '/(profile)/profile'
+    '/_profile/profile': {
+      id: '/_profile/profile'
       path: '/profile'
       fullPath: '/profile'
-      preLoaderRoute: typeof profileProfileLazyImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof ProfileProfileLazyImport
+      parentRoute: typeof ProfileImport
+    }
+    '/_profile/search': {
+      id: '/_profile/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof ProfileSearchLazyImport
+      parentRoute: typeof ProfileImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface AppRouteChildren {
+  AppMarketsLazyRoute: typeof AppMarketsLazyRoute
+  AppMoreLazyRoute: typeof AppMoreLazyRoute
+  AppNewsLazyRoute: typeof AppNewsLazyRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppMarketsLazyRoute: AppMarketsLazyRoute,
+  AppMoreLazyRoute: AppMoreLazyRoute,
+  AppNewsLazyRoute: AppNewsLazyRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
+interface AuthRouteChildren {
+  AuthLoginLazyRoute: typeof AuthLoginLazyRoute
+  AuthRegisterLazyRoute: typeof AuthRegisterLazyRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthLoginLazyRoute: AuthLoginLazyRoute,
+  AuthRegisterLazyRoute: AuthRegisterLazyRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
+interface PortfolioRouteChildren {
+  PortfolioAssetsLazyRoute: typeof PortfolioAssetsLazyRoute
+  PortfolioDetailsLazyRoute: typeof PortfolioDetailsLazyRoute
+  PortfolioOverviewLazyRoute: typeof PortfolioOverviewLazyRoute
+  PortfolioStatisticsLazyRoute: typeof PortfolioStatisticsLazyRoute
+  PortfolioTransactionsLazyRoute: typeof PortfolioTransactionsLazyRoute
+}
+
+const PortfolioRouteChildren: PortfolioRouteChildren = {
+  PortfolioAssetsLazyRoute: PortfolioAssetsLazyRoute,
+  PortfolioDetailsLazyRoute: PortfolioDetailsLazyRoute,
+  PortfolioOverviewLazyRoute: PortfolioOverviewLazyRoute,
+  PortfolioStatisticsLazyRoute: PortfolioStatisticsLazyRoute,
+  PortfolioTransactionsLazyRoute: PortfolioTransactionsLazyRoute,
+}
+
+const PortfolioRouteWithChildren = PortfolioRoute._addFileChildren(
+  PortfolioRouteChildren,
+)
+
+interface ProfileRouteChildren {
+  ProfileNotificationsLazyRoute: typeof ProfileNotificationsLazyRoute
+  ProfileProfileLazyRoute: typeof ProfileProfileLazyRoute
+  ProfileSearchLazyRoute: typeof ProfileSearchLazyRoute
+}
+
+const ProfileRouteChildren: ProfileRouteChildren = {
+  ProfileNotificationsLazyRoute: ProfileNotificationsLazyRoute,
+  ProfileProfileLazyRoute: ProfileProfileLazyRoute,
+  ProfileSearchLazyRoute: ProfileSearchLazyRoute,
+}
+
+const ProfileRouteWithChildren =
+  ProfileRoute._addFileChildren(ProfileRouteChildren)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/assets': typeof appAssetsLazyRoute
-  '/details': typeof appDetailsLazyRoute
-  '/markets': typeof appMarketsLazyRoute
-  '/more': typeof appMoreLazyRoute
-  '/news': typeof appNewsLazyRoute
-  '/overview': typeof appOverviewLazyRoute
-  '/search': typeof appSearchLazyRoute
-  '/stats': typeof appStatsLazyRoute
-  '/transactions': typeof appTransactionsLazyRoute
-  '/login': typeof authLoginLazyRoute
-  '/register': typeof authRegisterLazyRoute
-  '/notifications': typeof profileNotificationsLazyRoute
-  '/profile': typeof profileProfileLazyRoute
+  '': typeof ProfileRouteWithChildren
+  '/markets': typeof AppMarketsLazyRoute
+  '/more': typeof AppMoreLazyRoute
+  '/news': typeof AppNewsLazyRoute
+  '/login': typeof AuthLoginLazyRoute
+  '/register': typeof AuthRegisterLazyRoute
+  '/assets': typeof PortfolioAssetsLazyRoute
+  '/details': typeof PortfolioDetailsLazyRoute
+  '/overview': typeof PortfolioOverviewLazyRoute
+  '/statistics': typeof PortfolioStatisticsLazyRoute
+  '/transactions': typeof PortfolioTransactionsLazyRoute
+  '/notifications': typeof ProfileNotificationsLazyRoute
+  '/profile': typeof ProfileProfileLazyRoute
+  '/search': typeof ProfileSearchLazyRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/assets': typeof appAssetsLazyRoute
-  '/details': typeof appDetailsLazyRoute
-  '/markets': typeof appMarketsLazyRoute
-  '/more': typeof appMoreLazyRoute
-  '/news': typeof appNewsLazyRoute
-  '/overview': typeof appOverviewLazyRoute
-  '/search': typeof appSearchLazyRoute
-  '/stats': typeof appStatsLazyRoute
-  '/transactions': typeof appTransactionsLazyRoute
-  '/login': typeof authLoginLazyRoute
-  '/register': typeof authRegisterLazyRoute
-  '/notifications': typeof profileNotificationsLazyRoute
-  '/profile': typeof profileProfileLazyRoute
+  '': typeof ProfileRouteWithChildren
+  '/markets': typeof AppMarketsLazyRoute
+  '/more': typeof AppMoreLazyRoute
+  '/news': typeof AppNewsLazyRoute
+  '/login': typeof AuthLoginLazyRoute
+  '/register': typeof AuthRegisterLazyRoute
+  '/assets': typeof PortfolioAssetsLazyRoute
+  '/details': typeof PortfolioDetailsLazyRoute
+  '/overview': typeof PortfolioOverviewLazyRoute
+  '/statistics': typeof PortfolioStatisticsLazyRoute
+  '/transactions': typeof PortfolioTransactionsLazyRoute
+  '/notifications': typeof ProfileNotificationsLazyRoute
+  '/profile': typeof ProfileProfileLazyRoute
+  '/search': typeof ProfileSearchLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/(app)/assets': typeof appAssetsLazyRoute
-  '/(app)/details': typeof appDetailsLazyRoute
-  '/(app)/markets': typeof appMarketsLazyRoute
-  '/(app)/more': typeof appMoreLazyRoute
-  '/(app)/news': typeof appNewsLazyRoute
-  '/(app)/overview': typeof appOverviewLazyRoute
-  '/(app)/search': typeof appSearchLazyRoute
-  '/(app)/stats': typeof appStatsLazyRoute
-  '/(app)/transactions': typeof appTransactionsLazyRoute
-  '/(auth)/login': typeof authLoginLazyRoute
-  '/(auth)/register': typeof authRegisterLazyRoute
-  '/(profile)/notifications': typeof profileNotificationsLazyRoute
-  '/(profile)/profile': typeof profileProfileLazyRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_auth': typeof AuthRouteWithChildren
+  '/_portfolio': typeof PortfolioRouteWithChildren
+  '/_profile': typeof ProfileRouteWithChildren
+  '/_app/markets': typeof AppMarketsLazyRoute
+  '/_app/more': typeof AppMoreLazyRoute
+  '/_app/news': typeof AppNewsLazyRoute
+  '/_auth/login': typeof AuthLoginLazyRoute
+  '/_auth/register': typeof AuthRegisterLazyRoute
+  '/_portfolio/assets': typeof PortfolioAssetsLazyRoute
+  '/_portfolio/details': typeof PortfolioDetailsLazyRoute
+  '/_portfolio/overview': typeof PortfolioOverviewLazyRoute
+  '/_portfolio/statistics': typeof PortfolioStatisticsLazyRoute
+  '/_portfolio/transactions': typeof PortfolioTransactionsLazyRoute
+  '/_profile/notifications': typeof ProfileNotificationsLazyRoute
+  '/_profile/profile': typeof ProfileProfileLazyRoute
+  '/_profile/search': typeof ProfileSearchLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/assets'
-    | '/details'
+    | ''
     | '/markets'
     | '/more'
     | '/news'
-    | '/overview'
-    | '/search'
-    | '/stats'
-    | '/transactions'
     | '/login'
     | '/register'
+    | '/assets'
+    | '/details'
+    | '/overview'
+    | '/statistics'
+    | '/transactions'
     | '/notifications'
     | '/profile'
+    | '/search'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/assets'
-    | '/details'
+    | ''
     | '/markets'
     | '/more'
     | '/news'
-    | '/overview'
-    | '/search'
-    | '/stats'
-    | '/transactions'
     | '/login'
     | '/register'
+    | '/assets'
+    | '/details'
+    | '/overview'
+    | '/statistics'
+    | '/transactions'
     | '/notifications'
     | '/profile'
+    | '/search'
   id:
     | '__root__'
-    | '/'
-    | '/(app)/assets'
-    | '/(app)/details'
-    | '/(app)/markets'
-    | '/(app)/more'
-    | '/(app)/news'
-    | '/(app)/overview'
-    | '/(app)/search'
-    | '/(app)/stats'
-    | '/(app)/transactions'
-    | '/(auth)/login'
-    | '/(auth)/register'
-    | '/(profile)/notifications'
-    | '/(profile)/profile'
+    | '/_app'
+    | '/_auth'
+    | '/_portfolio'
+    | '/_profile'
+    | '/_app/markets'
+    | '/_app/more'
+    | '/_app/news'
+    | '/_auth/login'
+    | '/_auth/register'
+    | '/_portfolio/assets'
+    | '/_portfolio/details'
+    | '/_portfolio/overview'
+    | '/_portfolio/statistics'
+    | '/_portfolio/transactions'
+    | '/_profile/notifications'
+    | '/_profile/profile'
+    | '/_profile/search'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  appAssetsLazyRoute: typeof appAssetsLazyRoute
-  appDetailsLazyRoute: typeof appDetailsLazyRoute
-  appMarketsLazyRoute: typeof appMarketsLazyRoute
-  appMoreLazyRoute: typeof appMoreLazyRoute
-  appNewsLazyRoute: typeof appNewsLazyRoute
-  appOverviewLazyRoute: typeof appOverviewLazyRoute
-  appSearchLazyRoute: typeof appSearchLazyRoute
-  appStatsLazyRoute: typeof appStatsLazyRoute
-  appTransactionsLazyRoute: typeof appTransactionsLazyRoute
-  authLoginLazyRoute: typeof authLoginLazyRoute
-  authRegisterLazyRoute: typeof authRegisterLazyRoute
-  profileNotificationsLazyRoute: typeof profileNotificationsLazyRoute
-  profileProfileLazyRoute: typeof profileProfileLazyRoute
+  AppRoute: typeof AppRouteWithChildren
+  AuthRoute: typeof AuthRouteWithChildren
+  PortfolioRoute: typeof PortfolioRouteWithChildren
+  ProfileRoute: typeof ProfileRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  appAssetsLazyRoute: appAssetsLazyRoute,
-  appDetailsLazyRoute: appDetailsLazyRoute,
-  appMarketsLazyRoute: appMarketsLazyRoute,
-  appMoreLazyRoute: appMoreLazyRoute,
-  appNewsLazyRoute: appNewsLazyRoute,
-  appOverviewLazyRoute: appOverviewLazyRoute,
-  appSearchLazyRoute: appSearchLazyRoute,
-  appStatsLazyRoute: appStatsLazyRoute,
-  appTransactionsLazyRoute: appTransactionsLazyRoute,
-  authLoginLazyRoute: authLoginLazyRoute,
-  authRegisterLazyRoute: authRegisterLazyRoute,
-  profileNotificationsLazyRoute: profileNotificationsLazyRoute,
-  profileProfileLazyRoute: profileProfileLazyRoute,
+  AppRoute: AppRouteWithChildren,
+  AuthRoute: AuthRouteWithChildren,
+  PortfolioRoute: PortfolioRouteWithChildren,
+  ProfileRoute: ProfileRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -402,63 +481,96 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/(app)/assets",
-        "/(app)/details",
-        "/(app)/markets",
-        "/(app)/more",
-        "/(app)/news",
-        "/(app)/overview",
-        "/(app)/search",
-        "/(app)/stats",
-        "/(app)/transactions",
-        "/(auth)/login",
-        "/(auth)/register",
-        "/(profile)/notifications",
-        "/(profile)/profile"
+        "/_app",
+        "/_auth",
+        "/_portfolio",
+        "/_profile"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
+    "/_app": {
+      "filePath": "_app.tsx",
+      "children": [
+        "/_app/markets",
+        "/_app/more",
+        "/_app/news"
+      ]
     },
-    "/(app)/assets": {
-      "filePath": "(app)/assets.lazy.tsx"
+    "/_auth": {
+      "filePath": "_auth.tsx",
+      "children": [
+        "/_auth/login",
+        "/_auth/register"
+      ]
     },
-    "/(app)/details": {
-      "filePath": "(app)/details.lazy.tsx"
+    "/_portfolio": {
+      "filePath": "_portfolio.tsx",
+      "children": [
+        "/_portfolio/assets",
+        "/_portfolio/details",
+        "/_portfolio/overview",
+        "/_portfolio/statistics",
+        "/_portfolio/transactions"
+      ]
     },
-    "/(app)/markets": {
-      "filePath": "(app)/markets.lazy.tsx"
+    "/_profile": {
+      "filePath": "_profile.tsx",
+      "children": [
+        "/_profile/notifications",
+        "/_profile/profile",
+        "/_profile/search"
+      ]
     },
-    "/(app)/more": {
-      "filePath": "(app)/more.lazy.tsx"
+    "/_app/markets": {
+      "filePath": "_app/markets.lazy.tsx",
+      "parent": "/_app"
     },
-    "/(app)/news": {
-      "filePath": "(app)/news.lazy.tsx"
+    "/_app/more": {
+      "filePath": "_app/more.lazy.tsx",
+      "parent": "/_app"
     },
-    "/(app)/overview": {
-      "filePath": "(app)/overview.lazy.tsx"
+    "/_app/news": {
+      "filePath": "_app/news.lazy.tsx",
+      "parent": "/_app"
     },
-    "/(app)/search": {
-      "filePath": "(app)/search.lazy.tsx"
+    "/_auth/login": {
+      "filePath": "_auth/login.lazy.tsx",
+      "parent": "/_auth"
     },
-    "/(app)/stats": {
-      "filePath": "(app)/stats.lazy.tsx"
+    "/_auth/register": {
+      "filePath": "_auth/register.lazy.tsx",
+      "parent": "/_auth"
     },
-    "/(app)/transactions": {
-      "filePath": "(app)/transactions.lazy.tsx"
+    "/_portfolio/assets": {
+      "filePath": "_portfolio/assets.lazy.tsx",
+      "parent": "/_portfolio"
     },
-    "/(auth)/login": {
-      "filePath": "(auth)/login.lazy.tsx"
+    "/_portfolio/details": {
+      "filePath": "_portfolio/details.lazy.tsx",
+      "parent": "/_portfolio"
     },
-    "/(auth)/register": {
-      "filePath": "(auth)/register.lazy.tsx"
+    "/_portfolio/overview": {
+      "filePath": "_portfolio/overview.lazy.tsx",
+      "parent": "/_portfolio"
     },
-    "/(profile)/notifications": {
-      "filePath": "(profile)/notifications.lazy.tsx"
+    "/_portfolio/statistics": {
+      "filePath": "_portfolio/statistics.lazy.tsx",
+      "parent": "/_portfolio"
     },
-    "/(profile)/profile": {
-      "filePath": "(profile)/profile.lazy.tsx"
+    "/_portfolio/transactions": {
+      "filePath": "_portfolio/transactions.lazy.tsx",
+      "parent": "/_portfolio"
+    },
+    "/_profile/notifications": {
+      "filePath": "_profile/notifications.lazy.tsx",
+      "parent": "/_profile"
+    },
+    "/_profile/profile": {
+      "filePath": "_profile/profile.lazy.tsx",
+      "parent": "/_profile"
+    },
+    "/_profile/search": {
+      "filePath": "_profile/search.lazy.tsx",
+      "parent": "/_profile"
     }
   }
 }

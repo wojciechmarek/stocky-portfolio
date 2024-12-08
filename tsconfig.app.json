@@ -22,5 +22,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "src/components/molecules/navigation/.tsx"]
+  "include": [
+    "src",
+    "src/components/molecules/navigation/.tsx",
+    "src/routes/_portfolio/.lazy.tsx"
+  ]
 }

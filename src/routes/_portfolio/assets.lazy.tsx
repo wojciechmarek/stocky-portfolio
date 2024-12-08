@@ -7,7 +7,6 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import { StandardHeader } from "../../components/organisms/headers";
 
 export const Route = createLazyFileRoute("/assets" as never)({
   component: RouteComponent,
@@ -44,7 +43,6 @@ function RouteComponent() {
   ];
   return (
     <div className="flex flex-col h-full">
-      <StandardHeader title="Assets" />
       <Tabs>
         <TabsHeader
           className="bg-secondary-bg-color mt-6 mx-3"

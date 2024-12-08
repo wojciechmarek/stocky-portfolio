@@ -1,33 +1,33 @@
-import { Button, Input } from "@material-tailwind/react";
-import { createLazyFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useApi } from "../../api";
-import { ID } from "appwrite";
+import { Button, Input } from '@material-tailwind/react'
+import { createLazyFileRoute, Link, useNavigate } from '@tanstack/react-router'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useApi } from '../../api'
+import { ID } from 'appwrite'
 
-export const Route = createLazyFileRoute("/(auth)/register")({
+export const Route = createLazyFileRoute('/_auth/register')({
   component: RouteComponent,
-});
+})
 
 export type RegisterModel = {
-  email: string;
-  password: string;
-  confirmedPassword: string;
-};
+  email: string
+  password: string
+  confirmedPassword: string
+}
 
 function RouteComponent() {
-  const navigate = useNavigate();
-  const { account } = useApi();
+  const navigate = useNavigate()
+  const { account } = useApi()
 
   const handleOnGoogleLoginClick = () => {
-    navigate({ to: "/overview" });
-  };
+    navigate({ to: '/overview' })
+  }
 
-  const { register, handleSubmit } = useForm<RegisterModel>();
+  const { register, handleSubmit } = useForm<RegisterModel>()
 
   const onSubmit: SubmitHandler<RegisterModel> = async (data) => {
-    const user = await account.create(ID.unique(), data.email, data.password);
-    console.log("user created:", user);
-  };
+    const user = await account.create(ID.unique(), data.email, data.password)
+    console.log('user created:', user)
+  }
 
   return (
     <div className="flex h-full justify-center items-center px-3 flex-col">
@@ -40,19 +40,19 @@ function RouteComponent() {
           <Input
             label="Email"
             color="white"
-            {...register("email", { required: true })}
+            {...register('email', { required: true })}
           />
           <Input
             label="Password"
             type="password"
             color="white"
-            {...register("password", { required: true })}
+            {...register('password', { required: true })}
           />
           <Input
             label="Confirm password"
             type="password"
             color="white"
-            {...register("confirmedPassword", { required: true })}
+            {...register('confirmedPassword', { required: true })}
           />
           <Button
             type="submit"
@@ -81,5 +81,5 @@ function RouteComponent() {
         </p>
       </div>
     </div>
-  );
+  )
 }

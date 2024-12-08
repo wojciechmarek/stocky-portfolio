@@ -32,3 +32,15 @@
   --contrast-font-color: #000000de;
   --dimmed-font-color: #9fa5c8;
 }
+
+.dark-theme-button {
+  background: "";
+}
+
+.light-theme-button {
+  background: "linear-gradient(121deg, rgba(17,20,39,1) 50%, rgba(21,29,52,1) 50%);";
+}
+
+.system-theme-button {
+  background: "linear-gradient(121deg, rgba(17,20,39,1) 50%, rgba(21,29,52,1) 50%);";
+}
