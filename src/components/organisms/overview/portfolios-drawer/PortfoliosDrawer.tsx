@@ -26,9 +26,7 @@ export const PortfoliosDrawer = (props: Props) => {
           <X />
         </TransparentButton>
       </div>
-      <Typography className="mb-2 pr-4 font-normal">
-        Select a portfolio
-      </Typography>
+      <Typography className="mb-2 pr-4">Select a portfolio</Typography>
 
       <div className="flex flex-col gap-2 flex-1 overflow-y-auto">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
@@ -37,7 +35,7 @@ export const PortfoliosDrawer = (props: Props) => {
             key={item}
             onClick={onCloseClick}
           >
-            Portfolio {item}
+            <Typography variant="paragraph">Portfolio {item}</Typography>
           </StandardButton>
         ))}
       </div>

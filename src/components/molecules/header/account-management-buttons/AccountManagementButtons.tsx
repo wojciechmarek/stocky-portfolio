@@ -29,7 +29,7 @@ export const AccountManagementButtons = (
         </div>
       </TransparentButton>
       <TransparentButton className="p-2" onClick={() => onClick("profile")}>
-        <div className="h-8 w-8 rounded-full">
+        <div className="h-8 w-8 rounded-full bg-blue-800">
           <img src={profileImageUrl} alt="profile" className="rounded-full" />
         </div>
       </TransparentButton>

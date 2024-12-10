@@ -12,7 +12,7 @@ export const StandardTitle = (props: StandardTitleProps) => {
   return (
     <div className="p-2 flex flex-row items-center gap-3">
       {isBackButtonVisible && (
-        <Link to={"/overview"}>
+        <Link to={".."}>
           <TransparentButton className="p-0 flex flex-row items-center">
             <ChevronLeft />
           </TransparentButton>

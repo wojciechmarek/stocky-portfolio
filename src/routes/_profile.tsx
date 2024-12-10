@@ -11,9 +11,15 @@ export const Route = createFileRoute("/_profile")({
 
 function RouteComponent() {
   const router = useRouterState();
+
   return (
     <div className="bg-primary-bg-color text-primary-font-color flex flex-col h-dvh">
-      <StandardHeader title={router.location.pathname} />
+      <StandardHeader
+        title={
+          router.location.pathname.charAt(1).toUpperCase() +
+          router.location.pathname.slice(2)
+        }
+      />
       <Outlet />
     </div>
   );
