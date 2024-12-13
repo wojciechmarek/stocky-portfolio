@@ -42,11 +42,11 @@ export const DetailsButtonsSection = () => {
         break;
 
       case "transactions":
-        navigate({ to: "/transactions" });
+        navigate({ to: "/transactions?newTransaction=false" as never });
         break;
 
       case "add":
-        navigate({ to: "/transactions" });
+        navigate({ to: "/transactions?newTransaction=true" as never });
         break;
     }
   };

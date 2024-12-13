@@ -3,7 +3,7 @@ import {
   Outlet,
   useRouterState,
 } from "@tanstack/react-router";
-import { MobileNavigationBar, StandardHeader } from "../components/organisms";
+import { StandardHeader } from "../components/organisms";
 
 export const Route = createFileRoute("/_portfolio")({
   component: RouteComponent,
@@ -21,7 +21,6 @@ function RouteComponent() {
         }
       />
       <Outlet />
-      <MobileNavigationBar />
     </main>
   );
 }

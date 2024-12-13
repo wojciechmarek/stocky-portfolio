@@ -17,6 +17,7 @@ import { Route as ProfileImport } from './routes/_profile'
 import { Route as PortfolioImport } from './routes/_portfolio'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as AppImport } from './routes/_app'
+import { Route as PortfolioTransactionsImport } from './routes/_portfolio/transactions'
 
 // Create Virtual Routes
 
@@ -25,9 +26,6 @@ const ProfileSearchLazyImport = createFileRoute('/_profile/search')()
 const ProfileProfileLazyImport = createFileRoute('/_profile/profile')()
 const ProfileNotificationsLazyImport = createFileRoute(
   '/_profile/notifications',
-)()
-const PortfolioTransactionsLazyImport = createFileRoute(
-  '/_portfolio/transactions',
 )()
 const PortfolioStatisticsLazyImport = createFileRoute(
   '/_portfolio/statistics',
@@ -92,14 +90,6 @@ const ProfileNotificationsLazyRoute = ProfileNotificationsLazyImport.update({
   import('./routes/_profile/notifications.lazy').then((d) => d.Route),
 )
 
-const PortfolioTransactionsLazyRoute = PortfolioTransactionsLazyImport.update({
-  id: '/transactions',
-  path: '/transactions',
-  getParentRoute: () => PortfolioRoute,
-} as any).lazy(() =>
-  import('./routes/_portfolio/transactions.lazy').then((d) => d.Route),
-)
-
 const PortfolioStatisticsLazyRoute = PortfolioStatisticsLazyImport.update({
   id: '/statistics',
   path: '/statistics',
@@ -156,6 +146,12 @@ const AppMarketsLazyRoute = AppMarketsLazyImport.update({
   getParentRoute: () => AppRoute,
 } as any).lazy(() => import('./routes/_app/markets.lazy').then((d) => d.Route))
 
+const PortfolioTransactionsRoute = PortfolioTransactionsImport.update({
+  id: '/transactions',
+  path: '/transactions',
+  getParentRoute: () => PortfolioRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -194,6 +190,13 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof ProfileImport
       parentRoute: typeof rootRoute
+    }
+    '/_portfolio/transactions': {
+      id: '/_portfolio/transactions'
+      path: '/transactions'
+      fullPath: '/transactions'
+      preLoaderRoute: typeof PortfolioTransactionsImport
+      parentRoute: typeof PortfolioImport
     }
     '/_app/markets': {
       id: '/_app/markets'
@@ -251,13 +254,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioStatisticsLazyImport
       parentRoute: typeof PortfolioImport
     }
-    '/_portfolio/transactions': {
-      id: '/_portfolio/transactions'
-      path: '/transactions'
-      fullPath: '/transactions'
-      preLoaderRoute: typeof PortfolioTransactionsLazyImport
-      parentRoute: typeof PortfolioImport
-    }
     '/_profile/notifications': {
       id: '/_profile/notifications'
       path: '/notifications'
@@ -311,17 +307,17 @@ const AuthRouteChildren: AuthRouteChildren = {
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface PortfolioRouteChildren {
+  PortfolioTransactionsRoute: typeof PortfolioTransactionsRoute
   PortfolioAssetsLazyRoute: typeof PortfolioAssetsLazyRoute
   PortfolioDetailsLazyRoute: typeof PortfolioDetailsLazyRoute
   PortfolioStatisticsLazyRoute: typeof PortfolioStatisticsLazyRoute
-  PortfolioTransactionsLazyRoute: typeof PortfolioTransactionsLazyRoute
 }
 
 const PortfolioRouteChildren: PortfolioRouteChildren = {
+  PortfolioTransactionsRoute: PortfolioTransactionsRoute,
   PortfolioAssetsLazyRoute: PortfolioAssetsLazyRoute,
   PortfolioDetailsLazyRoute: PortfolioDetailsLazyRoute,
   PortfolioStatisticsLazyRoute: PortfolioStatisticsLazyRoute,
-  PortfolioTransactionsLazyRoute: PortfolioTransactionsLazyRoute,
 }
 
 const PortfolioRouteWithChildren = PortfolioRoute._addFileChildren(
@@ -346,6 +342,7 @@ const ProfileRouteWithChildren =
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '': typeof ProfileRouteWithChildren
+  '/transactions': typeof PortfolioTransactionsRoute
   '/markets': typeof AppMarketsLazyRoute
   '/more': typeof AppMoreLazyRoute
   '/news': typeof AppNewsLazyRoute
@@ -354,7 +351,6 @@ export interface FileRoutesByFullPath {
   '/assets': typeof PortfolioAssetsLazyRoute
   '/details': typeof PortfolioDetailsLazyRoute
   '/statistics': typeof PortfolioStatisticsLazyRoute
-  '/transactions': typeof PortfolioTransactionsLazyRoute
   '/notifications': typeof ProfileNotificationsLazyRoute
   '/profile': typeof ProfileProfileLazyRoute
   '/search': typeof ProfileSearchLazyRoute
@@ -363,6 +359,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '': typeof ProfileRouteWithChildren
+  '/transactions': typeof PortfolioTransactionsRoute
   '/markets': typeof AppMarketsLazyRoute
   '/more': typeof AppMoreLazyRoute
   '/news': typeof AppNewsLazyRoute
@@ -371,7 +368,6 @@ export interface FileRoutesByTo {
   '/assets': typeof PortfolioAssetsLazyRoute
   '/details': typeof PortfolioDetailsLazyRoute
   '/statistics': typeof PortfolioStatisticsLazyRoute
-  '/transactions': typeof PortfolioTransactionsLazyRoute
   '/notifications': typeof ProfileNotificationsLazyRoute
   '/profile': typeof ProfileProfileLazyRoute
   '/search': typeof ProfileSearchLazyRoute
@@ -384,6 +380,7 @@ export interface FileRoutesById {
   '/_auth': typeof AuthRouteWithChildren
   '/_portfolio': typeof PortfolioRouteWithChildren
   '/_profile': typeof ProfileRouteWithChildren
+  '/_portfolio/transactions': typeof PortfolioTransactionsRoute
   '/_app/markets': typeof AppMarketsLazyRoute
   '/_app/more': typeof AppMoreLazyRoute
   '/_app/news': typeof AppNewsLazyRoute
@@ -392,7 +389,6 @@ export interface FileRoutesById {
   '/_portfolio/assets': typeof PortfolioAssetsLazyRoute
   '/_portfolio/details': typeof PortfolioDetailsLazyRoute
   '/_portfolio/statistics': typeof PortfolioStatisticsLazyRoute
-  '/_portfolio/transactions': typeof PortfolioTransactionsLazyRoute
   '/_profile/notifications': typeof ProfileNotificationsLazyRoute
   '/_profile/profile': typeof ProfileProfileLazyRoute
   '/_profile/search': typeof ProfileSearchLazyRoute
@@ -403,6 +399,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | ''
+    | '/transactions'
     | '/markets'
     | '/more'
     | '/news'
@@ -411,7 +408,6 @@ export interface FileRouteTypes {
     | '/assets'
     | '/details'
     | '/statistics'
-    | '/transactions'
     | '/notifications'
     | '/profile'
     | '/search'
@@ -419,6 +415,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | ''
+    | '/transactions'
     | '/markets'
     | '/more'
     | '/news'
@@ -427,7 +424,6 @@ export interface FileRouteTypes {
     | '/assets'
     | '/details'
     | '/statistics'
-    | '/transactions'
     | '/notifications'
     | '/profile'
     | '/search'
@@ -438,6 +434,7 @@ export interface FileRouteTypes {
     | '/_auth'
     | '/_portfolio'
     | '/_profile'
+    | '/_portfolio/transactions'
     | '/_app/markets'
     | '/_app/more'
     | '/_app/news'
@@ -446,7 +443,6 @@ export interface FileRouteTypes {
     | '/_portfolio/assets'
     | '/_portfolio/details'
     | '/_portfolio/statistics'
-    | '/_portfolio/transactions'
     | '/_profile/notifications'
     | '/_profile/profile'
     | '/_profile/search'
@@ -507,10 +503,10 @@ export const routeTree = rootRoute
     "/_portfolio": {
       "filePath": "_portfolio.tsx",
       "children": [
+        "/_portfolio/transactions",
         "/_portfolio/assets",
         "/_portfolio/details",
-        "/_portfolio/statistics",
-        "/_portfolio/transactions"
+        "/_portfolio/statistics"
       ]
     },
     "/_profile": {
@@ -520,6 +516,10 @@ export const routeTree = rootRoute
         "/_profile/profile",
         "/_profile/search"
       ]
+    },
+    "/_portfolio/transactions": {
+      "filePath": "_portfolio/transactions.tsx",
+      "parent": "/_portfolio"
     },
     "/_app/markets": {
       "filePath": "_app/markets.lazy.tsx",
@@ -551,10 +551,6 @@ export const routeTree = rootRoute
     },
     "/_portfolio/statistics": {
       "filePath": "_portfolio/statistics.lazy.tsx",
-      "parent": "/_portfolio"
-    },
-    "/_portfolio/transactions": {
-      "filePath": "_portfolio/transactions.lazy.tsx",
       "parent": "/_portfolio"
     },
     "/_profile/notifications": {
