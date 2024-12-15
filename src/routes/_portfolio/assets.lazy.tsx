@@ -47,7 +47,7 @@ function RouteComponent() {
         <TabsHeader
           className="bg-secondary-bg-color mt-6 mx-3"
           indicatorProps={{
-            className: "bg-[#1e201f]",
+            className: "bg-primary-bg-color shadow-none !text-gray-900",
           }}
         >
           {data.map(({ label, value }) => (
@@ -56,9 +56,13 @@ function RouteComponent() {
             </Tab>
           ))}
         </TabsHeader>
-        <TabsBody className="mt-6 mx-6">
+        <TabsBody className="m-3">
           {data.map(({ value, desc }) => (
-            <TabPanel key={value} value={value} className="p-0 ">
+            <TabPanel
+              key={value}
+              value={value}
+              className="p-0 text-primary-font-color"
+            >
               {desc}
             </TabPanel>
           ))}

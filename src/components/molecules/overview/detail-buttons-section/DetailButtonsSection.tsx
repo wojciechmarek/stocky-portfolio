@@ -1,15 +1,19 @@
 import { TransparentButton } from "../../../atoms";
-import { ArrowLeftRight, ChartArea, List, PlusCircle } from "lucide-react";
+import { ArrowLeftRight, ChartArea, List, Settings } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 import { Typography } from "@material-tailwind/react";
 
-export type DetailButtonType = "details" | "assets" | "transactions" | "add";
+export type DetailButtonType =
+  | "statistics"
+  | "assets"
+  | "transactions"
+  | "settings";
 
 const overviewLinks = [
   {
-    label: "Details",
+    label: "Statistics",
     icon: <ChartArea />,
-    type: "details",
+    type: "statistics",
   },
   {
     label: "Assets",
@@ -22,9 +26,9 @@ const overviewLinks = [
     type: "transactions",
   },
   {
-    label: "Add",
-    icon: <PlusCircle />,
-    type: "add",
+    label: "Settings",
+    icon: <Settings />,
+    type: "settings",
   },
 ];
 
@@ -33,8 +37,8 @@ export const DetailsButtonsSection = () => {
 
   const handleOnSummaryButtonClick = (buttonType: DetailButtonType) => {
     switch (buttonType) {
-      case "details":
-        navigate({ to: "/details" });
+      case "statistics":
+        navigate({ to: "/statistics" });
         break;
 
       case "assets":
@@ -45,8 +49,8 @@ export const DetailsButtonsSection = () => {
         navigate({ to: "/transactions?newTransaction=false" as never });
         break;
 
-      case "add":
-        navigate({ to: "/transactions?newTransaction=true" as never });
+      case "settings":
+        navigate({ to: "/settings" as never });
         break;
     }
   };

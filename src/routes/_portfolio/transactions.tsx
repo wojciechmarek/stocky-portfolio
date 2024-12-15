@@ -1,5 +1,5 @@
 import {
-  IconButton,
+  Button,
   SpeedDial,
   SpeedDialAction,
   SpeedDialContent,
@@ -54,12 +54,9 @@ function RouteComponent() {
       <div className="absolute bottom-0 right-0">
         <SpeedDial>
           <SpeedDialHandler>
-            <IconButton
-              size="lg"
-              className="rounded-full bg-secondary-bg-color bottom-6 right-6"
-            >
-              <PlusIcon className="h-5 w-5 transition-transform group-hover:rotate-45" />
-            </IconButton>
+            <Button className="bg-secondary-bg-color rounded-full h-16 w-16 grid absolute right-6 bottom-6 p-0">
+              <PlusIcon className="h-5 w-5 transition-transform group-hover:rotate-45 place-self-center" />
+            </Button>
           </SpeedDialHandler>
           <SpeedDialContent>
             <SpeedDialAction

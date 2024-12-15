@@ -30,7 +30,7 @@ const ProfileNotificationsLazyImport = createFileRoute(
 const PortfolioStatisticsLazyImport = createFileRoute(
   '/_portfolio/statistics',
 )()
-const PortfolioDetailsLazyImport = createFileRoute('/_portfolio/details')()
+const PortfolioSettingsLazyImport = createFileRoute('/_portfolio/settings')()
 const PortfolioAssetsLazyImport = createFileRoute('/_portfolio/assets')()
 const AuthRegisterLazyImport = createFileRoute('/_auth/register')()
 const AuthLoginLazyImport = createFileRoute('/_auth/login')()
@@ -98,12 +98,12 @@ const PortfolioStatisticsLazyRoute = PortfolioStatisticsLazyImport.update({
   import('./routes/_portfolio/statistics.lazy').then((d) => d.Route),
 )
 
-const PortfolioDetailsLazyRoute = PortfolioDetailsLazyImport.update({
-  id: '/details',
-  path: '/details',
+const PortfolioSettingsLazyRoute = PortfolioSettingsLazyImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => PortfolioRoute,
 } as any).lazy(() =>
-  import('./routes/_portfolio/details.lazy').then((d) => d.Route),
+  import('./routes/_portfolio/settings.lazy').then((d) => d.Route),
 )
 
 const PortfolioAssetsLazyRoute = PortfolioAssetsLazyImport.update({
@@ -240,11 +240,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioAssetsLazyImport
       parentRoute: typeof PortfolioImport
     }
-    '/_portfolio/details': {
-      id: '/_portfolio/details'
-      path: '/details'
-      fullPath: '/details'
-      preLoaderRoute: typeof PortfolioDetailsLazyImport
+    '/_portfolio/settings': {
+      id: '/_portfolio/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof PortfolioSettingsLazyImport
       parentRoute: typeof PortfolioImport
     }
     '/_portfolio/statistics': {
@@ -309,14 +309,14 @@ const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 interface PortfolioRouteChildren {
   PortfolioTransactionsRoute: typeof PortfolioTransactionsRoute
   PortfolioAssetsLazyRoute: typeof PortfolioAssetsLazyRoute
-  PortfolioDetailsLazyRoute: typeof PortfolioDetailsLazyRoute
+  PortfolioSettingsLazyRoute: typeof PortfolioSettingsLazyRoute
   PortfolioStatisticsLazyRoute: typeof PortfolioStatisticsLazyRoute
 }
 
 const PortfolioRouteChildren: PortfolioRouteChildren = {
   PortfolioTransactionsRoute: PortfolioTransactionsRoute,
   PortfolioAssetsLazyRoute: PortfolioAssetsLazyRoute,
-  PortfolioDetailsLazyRoute: PortfolioDetailsLazyRoute,
+  PortfolioSettingsLazyRoute: PortfolioSettingsLazyRoute,
   PortfolioStatisticsLazyRoute: PortfolioStatisticsLazyRoute,
 }
 
@@ -349,7 +349,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof AuthLoginLazyRoute
   '/register': typeof AuthRegisterLazyRoute
   '/assets': typeof PortfolioAssetsLazyRoute
-  '/details': typeof PortfolioDetailsLazyRoute
+  '/settings': typeof PortfolioSettingsLazyRoute
   '/statistics': typeof PortfolioStatisticsLazyRoute
   '/notifications': typeof ProfileNotificationsLazyRoute
   '/profile': typeof ProfileProfileLazyRoute
@@ -366,7 +366,7 @@ export interface FileRoutesByTo {
   '/login': typeof AuthLoginLazyRoute
   '/register': typeof AuthRegisterLazyRoute
   '/assets': typeof PortfolioAssetsLazyRoute
-  '/details': typeof PortfolioDetailsLazyRoute
+  '/settings': typeof PortfolioSettingsLazyRoute
   '/statistics': typeof PortfolioStatisticsLazyRoute
   '/notifications': typeof ProfileNotificationsLazyRoute
   '/profile': typeof ProfileProfileLazyRoute
@@ -387,7 +387,7 @@ export interface FileRoutesById {
   '/_auth/login': typeof AuthLoginLazyRoute
   '/_auth/register': typeof AuthRegisterLazyRoute
   '/_portfolio/assets': typeof PortfolioAssetsLazyRoute
-  '/_portfolio/details': typeof PortfolioDetailsLazyRoute
+  '/_portfolio/settings': typeof PortfolioSettingsLazyRoute
   '/_portfolio/statistics': typeof PortfolioStatisticsLazyRoute
   '/_profile/notifications': typeof ProfileNotificationsLazyRoute
   '/_profile/profile': typeof ProfileProfileLazyRoute
@@ -406,7 +406,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/assets'
-    | '/details'
+    | '/settings'
     | '/statistics'
     | '/notifications'
     | '/profile'
@@ -422,7 +422,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/assets'
-    | '/details'
+    | '/settings'
     | '/statistics'
     | '/notifications'
     | '/profile'
@@ -441,7 +441,7 @@ export interface FileRouteTypes {
     | '/_auth/login'
     | '/_auth/register'
     | '/_portfolio/assets'
-    | '/_portfolio/details'
+    | '/_portfolio/settings'
     | '/_portfolio/statistics'
     | '/_profile/notifications'
     | '/_profile/profile'
@@ -505,7 +505,7 @@ export const routeTree = rootRoute
       "children": [
         "/_portfolio/transactions",
         "/_portfolio/assets",
-        "/_portfolio/details",
+        "/_portfolio/settings",
         "/_portfolio/statistics"
       ]
     },
@@ -545,8 +545,8 @@ export const routeTree = rootRoute
       "filePath": "_portfolio/assets.lazy.tsx",
       "parent": "/_portfolio"
     },
-    "/_portfolio/details": {
-      "filePath": "_portfolio/details.lazy.tsx",
+    "/_portfolio/settings": {
+      "filePath": "_portfolio/settings.lazy.tsx",
       "parent": "/_portfolio"
     },
     "/_portfolio/statistics": {
