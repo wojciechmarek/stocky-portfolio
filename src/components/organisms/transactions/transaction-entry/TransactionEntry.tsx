@@ -55,7 +55,7 @@ export const TransactionEntry = (props: TransactionEntryProps) => {
       <div className="flex-grow p-2 flex flex-col">
         <div className="flex flex-row">
           <Typography variant="small">
-            <span className="text-xl ">{amount}</span>
+            <span className="text-xl">{amount}</span> pcs
           </Typography>
           <div className="w-[1px] bg-blue-gray-900 m-2" />
           <Typography variant="small">
@@ -63,13 +63,15 @@ export const TransactionEntry = (props: TransactionEntryProps) => {
           </Typography>
           <div className="w-[1px] bg-blue-gray-900 m-2" />
           <Typography variant="small">
-            <span className="text-xl ">{price}</span> USD
+            <span className="text-xl ">{price}</span> USD/ea
           </Typography>
         </div>
         <div className="flex flex-row items-center text-blue-gray-700 gap-1 text-xs ">
           <span className="">{transactionType}</span>
           <span>•</span>
           <span>{new Date(date).toLocaleString()}</span>
+          <span>•</span>
+          <span>{amount * price} USD in total</span>
         </div>
       </div>
       <TransparentButton className="w-8 h-full flex flex-col items-center justify-center">
