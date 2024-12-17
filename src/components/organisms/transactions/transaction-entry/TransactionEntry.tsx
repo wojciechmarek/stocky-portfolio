@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { ChevronDown } from "lucide-react";
 import { TransparentButton } from "../../../atoms";
+import { Typography } from "@material-tailwind/react";
 
 export type TransactionType =
   | "buy"
@@ -14,11 +15,11 @@ export type TransactionEntryProps = {
   amount: number;
   ticker: string;
   price: number;
-  date?: string;
+  date: Date;
 };
 
 export const TransactionEntry = (props: TransactionEntryProps) => {
-  const { type, amount, ticker, price } = props;
+  const { type, amount, ticker, price, date } = props;
   let borderColor: string;
   let transactionType: string;
 
@@ -40,7 +41,7 @@ export const TransactionEntry = (props: TransactionEntryProps) => {
 
     case "dividend":
       borderColor = "bg-yellow-600";
-      transactionType = "Divident";
+      transactionType = "Dividend";
       break;
 
     case "costs":
@@ -49,18 +50,27 @@ export const TransactionEntry = (props: TransactionEntryProps) => {
       break;
   }
   return (
-    <div className="h-20 bg-secondary-bg-color rounded-2xl flex flex-row items-center">
+    <div className="h-16 bg-secondary-bg-color rounded-2xl flex flex-row items-center">
       <div className={`w-2 h-full rounded-l-2xl ${clsx(borderColor)}`} />
       <div className="flex-grow p-2 flex flex-col">
-        <p>{transactionType}</p>
-        <p>
-          <span className="font-bold text-xl">{amount}</span>
-          {" x "}
-          <span className="font-bold text-xl">{ticker}</span>
-          {" at "}
-
-          <span className="font-bold text-xl">{price}</span>
-        </p>
+        <div className="flex flex-row">
+          <Typography variant="small">
+            <span className="text-xl ">{amount}</span>
+          </Typography>
+          <div className="w-[1px] bg-blue-gray-900 m-2" />
+          <Typography variant="small">
+            <span className="text-xl ">{ticker}</span>
+          </Typography>
+          <div className="w-[1px] bg-blue-gray-900 m-2" />
+          <Typography variant="small">
+            <span className="text-xl ">{price}</span> USD
+          </Typography>
+        </div>
+        <div className="flex flex-row items-center text-blue-gray-700 gap-1 text-xs ">
+          <span className="">{transactionType}</span>
+          <span>•</span>
+          <span>{new Date(date).toLocaleString()}</span>
+        </div>
       </div>
       <TransparentButton className="w-8 h-full flex flex-col items-center justify-center">
         <ChevronDown />

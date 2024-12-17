@@ -57,36 +57,42 @@ function RouteComponent() {
       amount: 14,
       ticker: "NYSE:GOOG",
       price: 105.34,
+      date: "Mon Jan 13 2025 20:46:40 GMT+0100 (Central European Standard Time)" as never,
     },
     {
       type: "sell" as never,
       amount: 15,
       ticker: "FRA:USDA",
       price: 105.34,
+      date: "Mon Jan 13 2025 20:46:40 GMT+0100 (Central European Standard Time)" as never,
     },
     {
       type: "cashflow" as never,
       amount: 3432,
       ticker: "WSE:BDX",
       price: 105.34,
+      date: "Mon Jan 13 2025 20:46:40 GMT+0100 (Central European Standard Time)" as never,
     },
     {
       type: "costs" as never,
       amount: 3432,
       ticker: "WSE:BDX",
       price: 105.34,
+      date: "Mon Jan 13 2025 20:46:40 GMT+0100 (Central European Standard Time)" as never,
     },
     {
       type: "dividend" as never,
       amount: 3432,
       ticker: "WSE:BDX",
       price: 105.34,
+      date: "Mon Jan 13 2025 20:46:40 GMT+0100 (Central European Standard Time)" as never,
     },
     {
       type: "buy" as never,
       amount: 334,
       ticker: "NYSE:GOOG",
       price: 105.34,
+      date: "Mon Jan 13 2025 20:46:40 GMT+0100 (Central European Standard Time)" as never,
     },
   ];
 

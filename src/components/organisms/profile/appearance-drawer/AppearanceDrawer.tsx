@@ -61,21 +61,27 @@ export const AppearanceDrawer = (props: AppearanceDrawerProps) => {
         <Typography>Select a default theme</Typography>
         <div className="flex flex-row gap-2">
           <StandardButton
-            className={`p-1 border-2 ${clsx(theme === "light" ? "border-light-blue-600" : "border-transparent")}`}
+            className={`p-1 `}
             onClick={() => handleOnThemeChangeClick("light")}
           >
-            <div className="w-20 h-16 bg-gradient-to-br from-[#ffffff] from-50% to-[#d8dce2] to-50% rounded-md border-[#d8dce2] border-2" />
+            <div
+              className={`w-20 h-16 bg-gradient-to-br from-[#ffffff] from-50% to-[#d8dce2] to-50% rounded-md border-[#d8dce2] border-[3px] ${clsx(theme === "light" ? "border-blue-700" : "border-transparent")}`}
+            />
             <Typography variant="paragraph">Light</Typography>
           </StandardButton>
           <StandardButton
-            className={`p-1 border-2 ${clsx(theme === "dark" ? "border-light-blue-600" : "border-transparent")}`}
+            className={`p-1`}
             onClick={() => handleOnThemeChangeClick("dark")}
           >
-            <div className="w-20 h-16 bg-gradient-to-br from-[#111427] from-50% to-[#1d2848] to-50% rounded-md border-[#111427] border-2" />
+            <div
+              className={`w-20 h-16 bg-gradient-to-br ${clsx(theme === "dark" ? "border-light-blue-700" : "border-transparent")} from-[#111427] from-50% to-[#1d2848] to-50% rounded-md border-[#111427] border-[3px]`}
+            />
             <Typography variant="paragraph">Dark</Typography>
           </StandardButton>
           <StandardButton className="p-1">
-            <div className="w-20 h-16 bg-gradient-to-br from-[#111427] from-50% to-[#d8dce2] to-50% rounded-md border-[#111427] border-2" />
+            <div
+              className={`w-20 h-16 bg-gradient-to-br from-[#111427] ${clsx(theme === "system" ? "border-light-blue-700" : "border-transparent")} from-50% to-[#d8dce2] to-50% rounded-md border-[#111427] border-[3px]`}
+            />
             <Typography variant="paragraph">System</Typography>
           </StandardButton>
         </div>
