@@ -10,7 +10,7 @@ export const MobileNavigationBar = () => {
   ];
 
   return (
-    <div className="bg-secondary-bg-color border-t-2 border-primary-bg-color pb-3 h-16 flex items-center justify-evenly p-2 sticky bottom-0 w-full">
+    <div className="bg-secondary-bg-color border-t-2 border-primary-bg-color pb-3 h-24 flex items-center justify-evenly p-2 sticky bottom-0 w-full">
       {links.map((link) => (
         <MobileLink {...link} key={link.label} />
       ))}

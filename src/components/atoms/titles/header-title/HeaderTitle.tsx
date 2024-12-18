@@ -8,7 +8,7 @@ export const HeaderTitle = (props: HeaderTitleProps) => {
   const { value } = props;
 
   return (
-    <Typography variant="h1" className="text-3xl font-bold">
+    <Typography variant="h1" className="text-2xl font-bold">
       {value}
     </Typography>
   );

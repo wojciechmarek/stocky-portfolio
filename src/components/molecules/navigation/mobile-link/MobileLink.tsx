@@ -16,12 +16,10 @@ export const MobileLink = (props: MobileLinkProps) => {
     <Link to={to as never} className="group [&.active]:font-bold">
       <TransparentButton
         className="bg-transparent group-[&.active]:bg-primary-bg-color
-         rounded-full flex items-center normal-case"
+         rounded-full flex items-center normal-case flex-col w-24"
       >
-        <div className="h-6 w-6 flex">{icon}</div>
-        <Typography className="text-sm font-bold ml-3 hidden group-[&.active]:block">
-          {label}
-        </Typography>
+        <div className="h-5 w-5 flex">{icon}</div>
+        <Typography className="text-xs font-bold mt-1">{label}</Typography>
       </TransparentButton>
     </Link>
   );
