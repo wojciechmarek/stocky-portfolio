@@ -50,28 +50,32 @@ export const TransactionEntry = (props: TransactionEntryProps) => {
       break;
   }
   return (
-    <div className="h-16 bg-secondary-bg-color rounded-2xl flex flex-row items-center">
+    <div className="h-20 bg-secondary-bg-color rounded-2xl flex flex-row items-center">
       <div className={`w-2 h-full rounded-l-2xl ${clsx(borderColor)}`} />
-      <div className="flex-grow p-2 flex flex-col">
+      <div className="flex-grow p-2 flex flex-col justify-center h-full">
         <div className="flex flex-row">
           <Typography variant="small">
-            <span className="text-xl">{amount}</span> pcs
+            <span className="text-xl font-bold">{amount}</span> pcs
           </Typography>
           <div className="w-[1px] bg-blue-gray-900 m-2" />
           <Typography variant="small">
-            <span className="text-xl ">{ticker}</span>
+            <span className="text-xl font-bold">{ticker.split(":")[1]}</span>{" "}
+            {ticker.split(":")[0]}
           </Typography>
           <div className="w-[1px] bg-blue-gray-900 m-2" />
           <Typography variant="small">
-            <span className="text-xl ">{price}</span> USD/ea
+            <span className="text-xl font-bold">
+              {(amount * price).toFixed(2)}
+            </span>{" "}
+            USD
           </Typography>
         </div>
         <div className="flex flex-row items-center text-blue-gray-700 gap-1 text-xs ">
           <span className="">{transactionType}</span>
           <span>•</span>
-          <span>{new Date(date).toLocaleString()}</span>
+          <span>{new Date(date).toLocaleString("pl-PL")}</span>
           <span>•</span>
-          <span>{amount * price} USD in total</span>
+          <span>{price} USD per piece</span>
         </div>
       </div>
       <TransparentButton className="w-8 h-full flex flex-col items-center justify-center">

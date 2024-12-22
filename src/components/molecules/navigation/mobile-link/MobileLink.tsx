@@ -15,7 +15,7 @@ export const MobileLink = (props: MobileLinkProps) => {
   return (
     <Link to={to as never} className="group [&.active]:font-bold">
       <TransparentButton
-        className="bg-transparent group-[&.active]:bg-primary-bg-color
+        className="bg-transparent group-[&.active]:bg-primary-bg-color group-[&.active]:text-primary-font-color text-dimmed-font-color
          rounded-full flex items-center normal-case flex-col w-24"
       >
         <div className="h-5 w-5 flex">{icon}</div>

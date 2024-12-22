@@ -7,6 +7,8 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
+import { useState } from "react";
+import clsx from "clsx";
 
 export const Route = createLazyFileRoute("/assets" as never)({
   component: RouteComponent,
@@ -14,6 +16,20 @@ export const Route = createLazyFileRoute("/assets" as never)({
 
 function RouteComponent() {
   const data = [
+    {
+      label: "Worth",
+      value: "worth",
+      desc: `It really matters and then like it really doesn't matter.
+      What matters is the people who are sparked by it. And the people 
+      who are like offended by it, it doesn't matter.`,
+    },
+    {
+      label: "Best gainers",
+      value: "24h",
+      desc: `It really matters and then like it really doesn't matter.
+      What matters is the people who are sparked by it. And the people 
+      who are like offended by it, it doesn't matter.`,
+    },
     {
       label: "Type",
       value: "html",
@@ -41,18 +57,28 @@ function RouteComponent() {
       to follow my dreams and inspire other people to follow their dreams, too.`,
     },
   ];
+
+  const [activeTab, setActiveTab] = useState("");
+
   return (
     <div className="flex flex-col h-full">
       <Tabs>
         <TabsHeader
-          className="bg-secondary-bg-color mt-6 mx-3"
+          className="rounded-none border-b border-blue-gray-400 bg-transparent p-0 overflow-x-auto scrollbar-hidden"
+          defaultValue={"24h"}
           indicatorProps={{
-            className: "bg-primary-bg-color shadow-none !text-gray-900",
+            className:
+              "bg-transparent border-b-2 border-white shadow-none rounded-none",
           }}
         >
           {data.map(({ label, value }) => (
-            <Tab key={value} value={value} className="text-primary-font-color ">
-              {label}
+            <Tab
+              key={value}
+              value={value}
+              className={`text-dimmed-font-color  ${clsx(activeTab === value ? "text-primary-font-color font-bold" : "")}`}
+              onClick={() => setActiveTab(value)}
+            >
+              <p className="w-28">{label}</p>
             </Tab>
           ))}
         </TabsHeader>
@@ -61,7 +87,7 @@ function RouteComponent() {
             <TabPanel
               key={value}
               value={value}
-              className="p-0 text-primary-font-color"
+              className={activeTab === value ? "text-gray-900" : ""}
             >
               {desc}
             </TabPanel>
