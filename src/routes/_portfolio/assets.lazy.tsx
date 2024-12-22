@@ -58,14 +58,14 @@ function RouteComponent() {
     },
   ];
 
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState("worth");
 
   return (
     <div className="flex flex-col h-full">
+      <div className="mt-3" />
       <Tabs>
         <TabsHeader
-          className="rounded-none border-b border-blue-gray-400 bg-transparent p-0 overflow-x-auto scrollbar-hidden"
-          defaultValue={"24h"}
+          className="rounded-none border-b border-blue-gray-400 bg-transparent p-0 overflow-x-auto scrollbar-hidden px-3"
           indicatorProps={{
             className:
               "bg-transparent border-b-2 border-white shadow-none rounded-none",
@@ -82,7 +82,7 @@ function RouteComponent() {
             </Tab>
           ))}
         </TabsHeader>
-        <TabsBody className="m-3">
+        <TabsBody>
           {data.map(({ value, desc }) => (
             <TabPanel
               key={value}

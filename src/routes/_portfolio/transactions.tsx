@@ -98,7 +98,7 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col h-full mx-3">
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 mt-3">
         {transactions.map((transaction) => (
           <TransactionEntry {...transaction} />
         ))}
