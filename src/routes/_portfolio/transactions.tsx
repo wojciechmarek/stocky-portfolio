@@ -16,7 +16,7 @@ import {
 import { useState } from "react";
 import {
   NewTransactionDrawer,
-  TransactionEntry,
+  TransactionList,
 } from "../../components/organisms/transactions";
 import { variant } from "@material-tailwind/react/types/components/typography";
 import { createFileRoute } from "@tanstack/react-router";
@@ -51,58 +51,10 @@ function RouteComponent() {
     setIsNewTransactionDrawerOpened(true);
   };
 
-  const transactions = [
-    {
-      type: "buy" as never,
-      amount: 14,
-      ticker: "NYSE:GOOG",
-      price: 105.34,
-      date: "Mon Jan 13 2025 20:46:40 GMT+0100 (Central European Standard Time)" as never,
-    },
-    {
-      type: "sell" as never,
-      amount: 15,
-      ticker: "FRA:USDA",
-      price: 105.34,
-      date: "Mon Jan 13 2025 20:46:40 GMT+0100 (Central European Standard Time)" as never,
-    },
-    {
-      type: "cashflow" as never,
-      amount: 3432,
-      ticker: "WSE:BDX",
-      price: 105.34,
-      date: "Mon Jan 13 2025 20:46:40 GMT+0100 (Central European Standard Time)" as never,
-    },
-    {
-      type: "costs" as never,
-      amount: 3432,
-      ticker: "WSE:BDX",
-      price: 105.34,
-      date: "Mon Jan 13 2025 20:46:40 GMT+0100 (Central European Standard Time)" as never,
-    },
-    {
-      type: "dividend" as never,
-      amount: 3432,
-      ticker: "WSE:BDX",
-      price: 105.34,
-      date: "Mon Jan 13 2025 20:46:40 GMT+0100 (Central European Standard Time)" as never,
-    },
-    {
-      type: "buy" as never,
-      amount: 334,
-      ticker: "NYSE:GOOG",
-      price: 105.34,
-      date: "Mon Jan 13 2025 20:46:40 GMT+0100 (Central European Standard Time)" as never,
-    },
-  ];
-
   return (
     <div className="flex flex-col h-full mx-3">
-      <div className="flex flex-col gap-2 mt-3">
-        {transactions.map((transaction) => (
-          <TransactionEntry {...transaction} />
-        ))}
-      </div>
+      <div className="mt-3" />
+      <TransactionList />
       <div className="absolute bottom-0 right-0">
         <SpeedDial>
           <SpeedDialHandler>
