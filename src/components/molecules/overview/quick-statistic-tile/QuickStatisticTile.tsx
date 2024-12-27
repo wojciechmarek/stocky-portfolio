@@ -1,5 +1,5 @@
 import { Typography } from "@material-tailwind/react";
-import Chart, { Props } from "react-apexcharts";
+import ReactEcharts from "echarts-for-react";
 
 export type QuickStatTileProps = {
   name: string;
@@ -9,101 +9,25 @@ export type QuickStatTileProps = {
 };
 
 export const QuickStatisticTile = (props: QuickStatTileProps) => {
-  const { name, change, chartColor, value } = props;
+  const { name, change, value, chartColor } = props;
 
-  const chartConfig: Props = {
-    type: "line" as never,
-    height: 80,
+  const option = {
+    xAxis: {
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    },
+
+    yAxis: {
+      type: "value",
+    },
     series: [
       {
-        name: "Sales",
-        data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+        data: [120, 200, 150, 80, 70, 110, 130],
+        type: "line",
+        smooth: true,
+        color: chartColor,
       },
     ],
-    options: {
-      chart: {
-        toolbar: {
-          show: false,
-        },
-      },
-      title: {
-        // show: ,
-      },
-      dataLabels: {
-        // enabled: false,
-        enabled: false,
-      },
-      colors: [chartColor],
-      stroke: {
-        lineCap: "round" as never,
-        curve: "smooth" as never,
-      },
-      markers: {
-        size: 0,
-      },
-
-      xaxis: {
-        axisTicks: {
-          show: false,
-        },
-        axisBorder: {
-          show: false,
-        },
-        labels: {
-          show: false,
-          style: {
-            colors: "#616161",
-            fontSize: "12px",
-            fontFamily: "inherit",
-            fontWeight: 400,
-          },
-        },
-        categories: [
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
-      },
-      yaxis: {
-        labels: {
-          show: false,
-          style: {
-            colors: "#616161",
-            fontSize: "12px",
-            fontFamily: "inherit",
-            fontWeight: 400,
-          },
-        },
-      },
-      grid: {
-        show: false,
-        borderColor: "#dddddd",
-        strokeDashArray: 5,
-        xaxis: {
-          lines: {
-            show: true,
-          },
-        },
-        padding: {
-          top: 0,
-          right: 0,
-          left: 0,
-          bottom: 0,
-        },
-      },
-      fill: {
-        opacity: 0.8,
-      },
-      tooltip: {
-        theme: "dark",
-      },
-    },
   };
 
   return (
@@ -129,7 +53,9 @@ export const QuickStatisticTile = (props: QuickStatTileProps) => {
             {change}
           </Typography>
         </div>
-        <Chart {...chartConfig} />
+        <div className="flex-gro">
+          <ReactEcharts option={option} />
+        </div>
       </div>
     </div>
   );

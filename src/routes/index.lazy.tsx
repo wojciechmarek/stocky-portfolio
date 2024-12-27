@@ -20,31 +20,31 @@ function RouteComponent() {
       name: "Open positions",
       value: "$23,234",
       change: "+$1,231",
-      chartColor: "#2563eb",
+      chartColor: "#1fbd95",
     },
     {
       name: "Open profit",
       value: "$1,233",
       change: "+$12",
-      chartColor: "#2563eb",
+      chartColor: "#e77278",
     },
     {
       name: "Free cash",
       value: "$400",
       change: "$0",
-      chartColor: "#16a34a",
+      chartColor: "#f0c441",
     },
     {
       name: "XIRR",
       value: "9.34%",
       change: "-$0.23%",
-      chartColor: "#09090b",
+      chartColor: "#786e93",
     },
     {
       name: "Drawndown",
       value: "9.34%",
       change: "-$0.23%",
-      chartColor: "#09090b",
+      chartColor: "#cdd6dd",
     },
   ];
   return (
