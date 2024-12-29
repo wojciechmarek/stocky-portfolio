@@ -1,6 +1,8 @@
 import { Drawer, Typography } from "@material-tailwind/react";
 import { DrawerTitle, StandardButton, TransparentButton } from "../../../atoms";
+import { useMediaQuery } from "usehooks-ts";
 import { X } from "lucide-react";
+import clsx from "clsx";
 
 type Props = {
   isOpen: boolean;
@@ -9,13 +11,16 @@ type Props = {
 
 export const PortfoliosDrawer = (props: Props) => {
   const { isOpen, onCloseClick } = props;
+
+  const matches = useMediaQuery("(min-width: 720px)");
+
   return (
     <Drawer
-      placement="bottom"
+      placement={clsx(matches ? "right" : "bottom") as never}
       size={550}
       open={isOpen}
       onClose={onCloseClick}
-      className="p-4 bg-secondary-bg-color rounded-tl-3xl rounded-tr-3xl flex flex-col"
+      className={`p-4 bg-secondary-bg-color ${clsx(matches ? "rounded-tl-3xl rounded-bl-3xl" : "rounded-tl-3xl rounded-tr-3xl")} flex flex-col`}
     >
       <div className="mb-4 flex items-center justify-between">
         <DrawerTitle value="Portfolio" />

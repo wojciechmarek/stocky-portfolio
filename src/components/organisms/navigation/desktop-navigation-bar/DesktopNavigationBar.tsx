@@ -1,18 +1,17 @@
 import { ChartCandlestick, Ellipsis, Newspaper, Wallet } from "lucide-react";
-import { MobileLink } from "../../../molecules/navigation";
+import { DesktopLink } from "../../../molecules";
 
-export const MobileNavigationBar = () => {
+export const DesktopNavigationBar = () => {
   const links = [
     { label: "Overview", to: "/", icon: <Wallet /> },
     { label: "Markets", to: "/markets", icon: <ChartCandlestick /> },
     { label: "News", to: "/news", icon: <Newspaper /> },
     { label: "More", to: "/more", icon: <Ellipsis /> },
   ];
-
   return (
-    <div className="bg-secondary-bg-color border-t-2 border-primary-bg-color pb-3 h-24 flex items-center justify-evenly p-2 sticky bottom-0 w-full md:hidden">
+    <div className="bg-secondary-bg-color h-full w-56 flex-col p-2 hidden md:flex">
       {links.map((link) => (
-        <MobileLink {...link} key={link.label} />
+        <DesktopLink {...link} key={link.label} />
       ))}
     </div>
   );

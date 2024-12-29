@@ -1,6 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { OverviewHeader } from "../components/organisms/headers/overview-header/OverviewHeader";
 import {
+  DesktopNavigationBar,
   MobileNavigationBar,
   PortfoliosDrawer,
   SummaryJumbotron,
@@ -48,16 +49,20 @@ function RouteComponent() {
     },
   ];
   return (
-    <main className="bg-primary-bg-color text-primary-font-color flex flex-col h-dvh">
-      <OverviewHeader
-        onSelectorButtonClick={() => setIsPortfolioDrawerOpened(true)}
-      />
-      <div className="overflow-y-auto flex-grow">
-        <SummaryJumbotron className="mt-3" />
-        <div className="grid mt-6 mb-3 grid-cols-2 gap-2 mx-3">
-          {details.map((detail) => (
-            <QuickStatisticTile {...detail} />
-          ))}
+    <main className="bg-primary-bg-color text-primary-font-color flex flex-col md:flex-row h-dvh">
+      <DesktopNavigationBar />
+
+      <div className="md:w-full overflow-y-auto">
+        <OverviewHeader
+          onSelectorButtonClick={() => setIsPortfolioDrawerOpened(true)}
+        />
+        <div className="overflow-y-auto flex-grow">
+          <SummaryJumbotron className="mt-3" />
+          <div className="grid mt-6 mb-3 grid-cols-2 gap-2 mx-3">
+            {details.map((detail) => (
+              <QuickStatisticTile {...detail} />
+            ))}
+          </div>
         </div>
       </div>
 
