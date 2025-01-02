@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 export type TransparentButtonProps = {
   children: ReactNode;
-  className: string;
+  className?: string;
   [key: string]: unknown;
 };
 

@@ -15,11 +15,11 @@ export const DesktopLink = (props: DesktopLinkProps) => {
   return (
     <Link to={to as never} className="group [&.active]:font-bold">
       <TransparentButton
-        className="bg-transparent group-[&.active]:bg-primary-bg-color group-[&.active]:text-primary-font-color text-dimmed-font-color
-         rounded-full flex items-center normal-case w-full"
+        className="px-4 py-1 h-12 bg-transparent group-[&.active]:bg-primary-bg-color group-[&.active]:text-primary-font-color text-dimmed-font-color
+         rounded-xl flex items-center normal-case w-full"
       >
-        <div className="h-5 w-5 flex">{icon}</div>
-        <Typography className="text-xs font-bold mt-1">{label}</Typography>
+        <div className="w-8 flex justify-center content-center">{icon}</div>
+        <Typography className="text-sm font-bold ml-2">{label}</Typography>
       </TransparentButton>
     </Link>
   );

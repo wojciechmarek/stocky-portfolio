@@ -37,7 +37,7 @@ export const StandardHeader = (props: StandardHeaderProps) => {
     }
   };
   return (
-    <div className="flex flex-row mx-3 mt-6 mb-3 items-center justify-between">
+    <div className="flex flex-row p-2 pt-3 items-center justify-between md:sticky md:top-0 bg-primary-bg-color z-10">
       <StandardTitle value={title} isBackButtonVisible={isBackButtonVisible} />
       <AccountManagementButtons
         onClick={handleAccountManagementButtonClick}
