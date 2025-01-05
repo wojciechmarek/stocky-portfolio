@@ -52,9 +52,17 @@ function RouteComponent() {
   };
 
   return (
-    <div className="flex flex-col h-full mx-3">
-      <div className="mt-3" />
+    <div className="flex flex-col h-full mx-3 relative">
+      <div className="sticky mt-3 grid grid-cols-[_1fr,_2fr,_2fr,_2fr,_3fr] h-10 rounded-lg bg-secondary-bg-color font-bold items-center">
+        <span className="ml-3">Type</span>
+        <span>Date</span>
+        <span>Amount</span>
+        <span>Asset</span>
+        <span>Price</span>
+      </div>
+
       <TransactionList />
+
       <div className="absolute bottom-0 right-0">
         <SpeedDial>
           <SpeedDialHandler>

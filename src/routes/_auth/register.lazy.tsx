@@ -1,4 +1,4 @@
-import { Button, Input } from "@material-tailwind/react";
+import { Button, Input, Typography } from "@material-tailwind/react";
 import { createLazyFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useApi } from "../../api";
@@ -31,10 +31,15 @@ function RouteComponent() {
 
   return (
     <div className="flex h-full justify-center items-center px-3 flex-col">
-      <div className="flex flex-col bg-secondary-bg-color w-11/12 p-6 rounded-2xl">
-        <h2 className="text-3xl font-bold">Register</h2>
+      <div className="flex flex-col bg-secondary-bg-color w-11/12 md:w-96 p-6 rounded-2xl">
+        <Typography variant="h1" className="text-3xl">
+          Stocky
+        </Typography>
+        <Typography variant="h1" className="text-xl mt-3">
+          Register a new account:
+        </Typography>
         <form
-          className="flex flex-col gap-y-2 mt-6"
+          className="flex flex-col gap-y-2 mt-3"
           onSubmit={handleSubmit(onSubmit)}
         >
           <Input
@@ -73,7 +78,7 @@ function RouteComponent() {
           />
           <span>Continue with Google</span>
         </Button>
-        <p className="text-xs text-center mt-6">
+        <p className="text-sm text-center mt-6">
           Current have an account?
           <Link to="/login" className="ml-1 underline text-blue-500">
             Login

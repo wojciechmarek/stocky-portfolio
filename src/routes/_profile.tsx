@@ -23,7 +23,7 @@ function RouteComponent() {
             router.location.pathname.slice(2)
           }
         />
-        <div className="overflow-y-auto flex-grow">
+        <div className="overflow-y-auto flex-grow mx-auto max-w-7xl">
           <Outlet />
         </div>
       </div>

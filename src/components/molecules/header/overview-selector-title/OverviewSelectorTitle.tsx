@@ -3,7 +3,7 @@ import { ChevronsUpDown } from "lucide-react";
 
 export type OverviewSelectorTitleProps = {
   value: string;
-  onClick: () => void;
+  onClick: VoidFunction;
 };
 
 export const OverviewSelectorTitle = (props: OverviewSelectorTitleProps) => {

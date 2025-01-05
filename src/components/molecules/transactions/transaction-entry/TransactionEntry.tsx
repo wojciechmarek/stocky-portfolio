@@ -49,10 +49,39 @@ export const TransactionEntry = (props: TransactionEntryProps) => {
       transactionType = "Extra cost";
       break;
   }
+
   return (
-    <div className="h-20 bg-secondary-bg-color rounded-2xl flex flex-row items-center">
-      <div className={`w-2 h-full rounded-l-2xl ${clsx(borderColor)}`} />
-      <div className="flex-grow p-2 flex flex-col justify-center h-full">
+    <div className="h-20 md:h-12 bg-secondary-bg-color rounded-2xl flex flex-row items-center md:grid md:grid-cols-[_1fr,_2fr,_2fr,_2fr,_3fr]">
+      <div className={`w-2 h-full rounded-l-2xl ${clsx(borderColor)}`}>
+        <Typography variant="small" className="flex md:block ml-3">
+          <span className="font-bold  h-full">{transactionType}</span>
+        </Typography>
+      </div>
+      <div className="hidden md:block">
+        <Typography variant="small">
+          <span className="font-bold">
+            {new Date(date).toLocaleDateString("pl-PL")}
+          </span>
+        </Typography>
+      </div>
+      <div className="hidden md:block">
+        <Typography variant="small">
+          <span className="font-bold">{amount}</span>
+        </Typography>
+      </div>
+      <div className="hidden md:block">
+        <Typography variant="small">
+          <span className="font-bold">{ticker.split(":")[1]}</span>{" "}
+          {ticker.split(":")[0]}
+        </Typography>
+      </div>
+      <div className="hidden md:block">
+        <Typography variant="small">
+          <span className="font-bold">{(amount * price).toFixed(2)}</span> USD
+        </Typography>
+      </div>
+
+      <div className="flex-grow p-2 flex flex-col justify-center h-full md:hidden">
         <div className="flex flex-row">
           <Typography variant="small">
             <span className="text-xl font-bold">{amount}</span> pcs
@@ -78,7 +107,7 @@ export const TransactionEntry = (props: TransactionEntryProps) => {
           <span>{price} USD per piece</span>
         </div>
       </div>
-      <TransparentButton className="w-8 h-full flex flex-col items-center justify-center">
+      <TransparentButton className="w-8 h-full flex flex-col items-center justify-center md:hidden">
         <ChevronDown />
       </TransparentButton>
     </div>

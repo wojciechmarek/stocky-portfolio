@@ -1,6 +1,7 @@
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useRef } from "react";
 import { TransactionEntry } from "../../../molecules/transactions";
+import { useMediaQuery } from "usehooks-ts";
 
 const transactions = [
   {
@@ -50,15 +51,18 @@ const transactions = [
 export const TransactionList = () => {
   const parentRef = useRef(null);
 
+  const matches = useMediaQuery("(min-width: 720px)");
+
   // The virtualizer
   const rowVirtualizer = useVirtualizer({
-    count: 10000,
+    count: 100,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 90,
+    estimateSize: () => (matches ? 55 : 90),
   });
 
   return (
     <div
+      className="mt-6 relative"
       ref={parentRef}
       style={{
         height: `auto`,

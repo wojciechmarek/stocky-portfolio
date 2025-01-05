@@ -56,7 +56,7 @@ function RouteComponent() {
         <OverviewHeader
           onSelectorButtonClick={() => setIsPortfolioDrawerOpened(true)}
         />
-        <div className="overflow-y-auto flex-grow">
+        <div className="overflow-y-auto flex-grow mx-auto max-w-7xl">
           <SummaryJumbotron className="mt-3" />
           <div className="grid mt-6 mb-3 grid-cols-2 gap-2 mx-3">
             {details.map((detail) => (
